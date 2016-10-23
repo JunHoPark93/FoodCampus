@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="홈" />
+        <item
+            android:id="@+id/nav_dorm"
+            android:icon="@drawable/dorm"
+            android:title="기숙사" />
+        <item
+            android:id="@+id/nav_pizza"
+            android:icon="@drawable/pizza"
+            android:title="피자" />
+        <item
+            android:id="@+id/nav_chicken"
+            android:icon="@drawable/chicken"
+            android:title="치킨" />
+        <item
+            android:id="@+id/nav_korean"
+            android:icon="@drawable/korean"
+            android:title="한식" />
+        <item
+            android:id="@+id/nav_flour"
+            android:icon="@drawable/flour"
+            android:title="분식" />
+        <item
+            android:id="@+id/nav_jokbal"
+            android:icon="@drawable/jokbal"
+            android:title="족발" />
+
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="로그아웃" />
+        <item
+            android:id="@+id/nav_withdrawal"
+            android:icon="@drawable/withdrawal"
+            android:title="탈퇴하기" />
+
+
+    </group>
+
+</menu>
