@@ -7,7 +7,6 @@ import com.jarvis.foodcampus.view.detail.DetailView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 /**
  * Created by EunBi on 2016-10-23.
@@ -33,7 +32,6 @@ public class DetailPresenterImpl implements DetailPresenter {
         arrayGroup.add("Pizza");
         arrayGroup.add("Chicken");
         arrayGroup.add("Pork");
-
 
         ArrayList<DetailModel> arrayPizza = new ArrayList<DetailModel>();
         ArrayList<DetailModel> arrayChicken = new ArrayList<DetailModel>();

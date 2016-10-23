@@ -10,7 +10,7 @@ import com.jarvis.foodcampus.R;
 import com.jarvis.foodcampus.presenter.main.MainPresenter;
 import com.jarvis.foodcampus.presenter.main.MainPresenterImpl;
 import com.jarvis.foodcampus.view.base.BaseActivity;
-import com.jarvis.foodcampus.view.detail.DetailActivity;
+import com.jarvis.foodcampus.view.restaurant.RestaurantActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements MainView {
         // 혹시 다른 버튼의 기능이 추가될 수도 있으므로
         String btnCheck = mainPresenter.mainBtnCheck(v);
 
-        Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+        Intent intent = new Intent(getApplicationContext(), RestaurantActivity.class);
         startActivity(intent);
     }
 

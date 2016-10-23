@@ -38,7 +38,6 @@ public class DetailAdapter extends BaseExpandableListAdapter{
         arrayChild = new HashMap<>();
     }
 
-
     @Override
     public int getGroupCount() {
         return arrayGroup.size();

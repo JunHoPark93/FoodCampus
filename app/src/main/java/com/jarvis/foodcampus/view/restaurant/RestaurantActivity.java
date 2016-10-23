@@ -1,5 +1,6 @@
 package com.jarvis.foodcampus.view.restaurant;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.jarvis.foodcampus.presenter.restaurant.RestaurantAdpater;
 import com.jarvis.foodcampus.presenter.restaurant.RestaurantPresenterImpl;
 import com.jarvis.foodcampus.presenter.restaurant.RestaurantPrestenter;
 import com.jarvis.foodcampus.view.base.BaseActivity;
+import com.jarvis.foodcampus.view.detail.DetailActivity;
 
 /**
  * Created by JunHo on 2016-10-22.
@@ -49,5 +51,11 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         RestaurantModel pizzaViewItem = (RestaurantModel) parent.getItemAtPosition(position);
         Toast.makeText(getApplicationContext(),"position"+position+"  "+pizzaViewItem.getTitleStr(), Toast.LENGTH_SHORT ).show();
+
+        // 나중엔 position 에따라 달라짐
+        // 인텐트
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
+        //finish(); 피니시를 해야될까
     }
 }

@@ -24,9 +24,12 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
      *  어떤 데이터를 붙일지 서버에서 가져올 것
      */
     public void initData() {
-        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.chicken),"두마리치킨", "호롤로");
-        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.chicken),"세마리치킨", "호롤로");
-        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.chicken),"네마리치킨", "호롤로");
-        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.chicken),"다섯마리치킨", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.nene),"네네치킨", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.wang),"왕서방치킨피자", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.seunsal),"순살나라", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.tiva),"티바두마리치킨", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.kyochon),"교촌치킨", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.peli),"페리카나", "호롤로");
+        restaurantView.add(ContextCompat.getDrawable(context, R.drawable.bbq),"비비큐", "호롤로");
     }
 }
