@@ -11,7 +11,6 @@ import com.jarvis.foodcampus.presenter.main.MainPresenter;
 import com.jarvis.foodcampus.presenter.main.MainPresenterImpl;
 import com.jarvis.foodcampus.view.base.BaseActivity;
 import com.jarvis.foodcampus.view.detail.DetailActivity;
-import com.jarvis.foodcampus.view.restaurant.RestaurantActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +20,8 @@ public class MainActivity extends BaseActivity implements MainView {
 
     private MainPresenter mainPresenter;
 
-    @BindView(R.id.pizza_btn) ImageButton pizzaBtn;
+    @BindView(R.id.pizza_btn)
+    ImageButton pizzaBtn;
     @BindView(R.id.chicken_btn)
     ImageButton chickenBtn;
     @BindView(R.id.hansik_btn)

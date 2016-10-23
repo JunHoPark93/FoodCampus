@@ -18,21 +18,37 @@ import com.jarvis.foodcampus.view.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * Created by EunBi on 2016-10-23.
  */
 
 public class DetailActivity  extends BaseActivity implements DetailView {
+
     ExpandableListView listView;
-
-
-
-    private TextView _grade, _name, _orderNumber, _openHour, _intro;
-    private Button _phoneBtn;
-
-
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
+
+    @BindView(R.id.detail_grade)
+    TextView grade;
+    @BindView(R.id.detail_name)
+    TextView name;
+    @BindView(R.id.detail_hour)
+    TextView openHour;
+    @BindView(R.id.detail_order)
+    TextView orderNumber;
+    @BindView(R.id.detail_intro)
+    TextView intro;
+    @BindView(R.id.detail_phone_btn)
+    Button phoneBtn;
+
+    @OnClick(R.id.detail_phone_btn)
+    public void onClick(View v) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phoneBtn.getText().toString().toLowerCase()));
+        startActivity(intent);
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,29 +56,17 @@ public class DetailActivity  extends BaseActivity implements DetailView {
 
         listView = (ExpandableListView) this.findViewById(R.id.detail_expendList);
 
-        _grade = (TextView)this.findViewById(R.id.detail_grade);
-        _name = (TextView)this.findViewById(R.id.detail_name);
-        _openHour = (TextView)this.findViewById(R.id.detail_hour);
-        _orderNumber = (TextView)this.findViewById(R.id.detail_order);
-        _intro = (TextView)this.findViewById(R.id.detail_intro);
-
-        _phoneBtn = (Button)this.findViewById(R.id.detail_phone_btn);
-
-
-
         //임시로 일케 연결함 intent로 넘겨주세요
-        _name.setText("은비네 두마리 치킨");
-        _grade.setText("좋아요 : 10 / 싫어요 : 5");
-        _orderNumber.setText("총 주문수 : 8회");
-        _openHour.setText("15:00 ~ 23:00");
-        _intro.setText("안녕하세요? \nJarvis 팀이 만든 Application\n [ 푸드캠퍼스 ] 입니다. \n 맛잇는거 많이 시켜드세용");
+        name.setText("은비네 두마리 치킨");
+        grade.setText("좋아요 : 10 / 싫어요 : 5");
+        orderNumber.setText("총 주문수 : 8회");
+        openHour.setText("15:00 ~ 23:00");
+        intro.setText("안녕하세요? \nJarvis 팀이 만든 Application\n [ 푸드캠퍼스 ] 입니다. \n 맛잇는거 많이 시켜드세용");
 
-        _phoneBtn.setText("tel:010-5520-5333");
-
+        phoneBtn.setText("tel:010-5520-5333");
 
         detailAdapter = new DetailAdapter(this);
         listView.setAdapter(detailAdapter);
-
 
         detailPresenter = new DetailPresenterImpl(this, getApplicationContext());
         detailPresenter.initData();
@@ -71,13 +75,6 @@ public class DetailActivity  extends BaseActivity implements DetailView {
 
    //     listView.setAdapter(new DetailAdapter(this, arrayGroup, arrayChild));
 
-        _phoneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(_phoneBtn.getText().toString().toLowerCase()));
-                startActivity(intent);
-            }
-        });
 
     }
 
