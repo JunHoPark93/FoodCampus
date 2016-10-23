@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    >
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/pizza_pic"
-        android:src="@drawable/chicken"
-        android:layout_weight="1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pizza_icon"
-        android:src="@drawable/kakao_login_symbol"
-        android:layout_weight="1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/pizza_name" />
+        <ImageView
+            android:layout_width="700px"
+            android:layout_height="match_parent"
+            android:id="@+id/restaurant_pic"
+            android:src="@drawable/chicken"
+            android:layout_weight="0.4"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="3dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/pizza_name"
+                android:layout_weight="0.6"
+                android:text="chicken"
+                android:textSize="25dp"
+                android:textAlignment="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignBottom="@+id/restaurant_pic"
+                android:layout_toLeftOf="@+id/food_image"
+                android:layout_toRightOf="@+id/restaurant_pic"
+                android:layout_toEndOf="@+id/restaurant_pic" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pizza_name"
-        android:text="chicken"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:gravity="center_vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/pizza_pic"
-        android:layout_toLeftOf="@+id/pizza_icon"
-        android:layout_toRightOf="@+id/pizza_pic"
-        android:layout_toEndOf="@+id/pizza_pic" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
