@@ -5,4 +5,5 @@ package com.jarvis.foodcampus.model;
  */
 
 public class test2 {
+//    고은비여신짱짱맨
 }

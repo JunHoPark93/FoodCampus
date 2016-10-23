@@ -5,4 +5,6 @@ package com.jarvis.foodcampus.model;
  */
 
 public class test {
+
+    // test랍니다
 }
