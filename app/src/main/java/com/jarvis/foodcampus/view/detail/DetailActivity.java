@@ -60,8 +60,9 @@ public class DetailActivity  extends BaseActivity implements DetailView {
         _phoneBtn.setText("tel:010-5520-5333");
 
 
-        detailAdapter = new DetailAdapter(this.getApplicationContext());
+        detailAdapter = new DetailAdapter(this);
         listView.setAdapter(detailAdapter);
+
 
         detailPresenter = new DetailPresenterImpl(this, getApplicationContext());
         detailPresenter.initData();

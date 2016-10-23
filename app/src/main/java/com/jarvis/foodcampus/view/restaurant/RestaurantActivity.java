@@ -31,6 +31,7 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
 
         listView = (ListView) findViewById(R.id.restaurant_listview);
         restaurantAdpater = new RestaurantAdpater();
+
         listView.setAdapter(restaurantAdpater);
 
         restaurantPrestenter = new RestaurantPresenterImpl(this, getApplicationContext());
