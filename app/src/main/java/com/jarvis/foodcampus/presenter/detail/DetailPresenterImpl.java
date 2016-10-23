@@ -7,6 +7,7 @@ import com.jarvis.foodcampus.view.detail.DetailView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by EunBi on 2016-10-23.
@@ -17,8 +18,8 @@ public class DetailPresenterImpl implements DetailPresenter {
     private Context context;
 
 
-    private ArrayList<String> arrayGroup;
-    private HashMap<String, ArrayList<DetailModel>> arrayChild;
+    private ArrayList<String> arrayGroup = new ArrayList<>();
+    private HashMap<String, ArrayList<DetailModel>> arrayChild = new HashMap<>();
 
     public DetailPresenterImpl(DetailView detailView, Context context) {
         this.detailView = detailView;

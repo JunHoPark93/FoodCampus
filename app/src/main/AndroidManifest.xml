@@ -50,6 +50,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
 
         </activity>
+        <activity android:name=".view.detail.DetailActivity"></activity>
 
 
         <!--카카오 API-->

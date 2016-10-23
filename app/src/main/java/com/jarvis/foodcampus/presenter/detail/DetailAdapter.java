@@ -31,8 +31,10 @@ public class DetailAdapter extends BaseExpandableListAdapter{
         this.arrayChild=arrayChild;
     }
 
-    public DetailAdapter(){
-
+    public DetailAdapter(Context context){
+        this.context=context;
+        arrayGroup = new ArrayList<>();
+        arrayChild = new HashMap<>();
     }
 
 

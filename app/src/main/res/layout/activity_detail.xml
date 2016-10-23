@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:id="@+id/detail_phone_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
+        android:text="phone"
+        android:background="@color/colorPrimaryDark"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/detail_phone_btn"
+        android:layout_alignStart="@+id/detail_phone_btn">
+
+        <ImageView
+            app:srcCompat="@drawable/chicken_icon"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:text="Grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+
+                android:id="@+id/detail_grade" />
+
+            <TextView
+                android:text="name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:id="@+id/detail_name" />
+
+            <TextView
+                android:text="Order Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:id="@+id/detail_order" />
+
+            <TextView
+                android:text="Opening hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:id="@+id/detail_hour" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_rate_layout"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/imageView2">
+
+            <TextView
+                android:text="Hate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_progress_hateTv"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:text="Like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/detail_progress_hateTv"
+                android:layout_marginRight="36dp"
+                android:layout_marginEnd="36dp"
+                android:id="@+id/detail_progress_likeTv" />
+
+            <ProgressBar
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/detail_progressbar"
+                android:visibility="visible"
+                tools:visibility="visible"
+                android:max="100"
+                android:progress="50"
+                android:layout_below="@+id/detail_progress_hateTv"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Switch
+                android:text="Switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch1"
+                android:layout_below="@+id/detail_progressbar"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:switchTextAppearance="@style/TextAppearance.AppCompat" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="Introduce My Restorant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_rate_layout"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/detail_intro" />
+
+        <ExpandableListView
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_expendList"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/detail_intro" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
