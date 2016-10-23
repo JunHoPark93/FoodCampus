@@ -5,24 +5,23 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:id="@+id/detail_phone_btn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="10dp"
-        android:text="phone"
-        android:background="@color/colorPrimaryDark"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/detail_phone_btn"
-        android:layout_alignStart="@+id/detail_phone_btn">
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/detail_phone_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:text="phone"
+            android:background="@color/colorPrimaryDark"/>
 
         <ImageView
             app:srcCompat="@drawable/chicken_icon"
@@ -82,7 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/detail_rate_layout"
-            android:layout_margin="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_below="@+id/imageView2">
 
             <TextView
@@ -118,16 +118,74 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-            <Switch
-                android:text="Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch1"
+
+            <Button
+                android:text="Click!"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:id="@+id/detail_review_btn"
                 android:layout_below="@+id/detail_progressbar"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:switchTextAppearance="@style/TextAppearance.AppCompat" />
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:textSize="10dp"
+                android:padding="0dp"
+                android:background="@color/colorPrimaryDark"
+                android:scaleType="centerCrop"
+                />
 
+            <RadioGroup
+                android:checkedButton="@+id/detail_like_btn"
+                android:id="@+id/detail_radio_group"
+                android:layout_height="30dp"
+                android:layout_width="150dp"
+                android:background="@drawable/detail_radio_out_line"
+                android:orientation="horizontal"
+                android:layout_below="@+id/detail_progressbar"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                >
+
+                <RadioButton
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:id="@+id/detail_like_btn"
+                    android:background="@drawable/detail_switch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.98"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Like"
+                    android:textColor="@color/com_kakao_account_button_background" />
+
+                <RadioButton
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:id="@+id/detail_hate_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_switch"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Hate"
+                    android:textColor="@color/com_kakao_account_button_background" />
+            </RadioGroup>
+
+            <TextView
+                android:text="Please review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/detail_radio_group"
+                android:id="@+id/detail_rate_tv"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/detail_progressbar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignBottom="@+id/detail_radio_group"
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
 
         <TextView
@@ -135,8 +193,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detail_rate_layout"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:id="@+id/detail_intro" />
 
         <ExpandableListView
@@ -145,9 +202,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/detail_expendList"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/detail_intro" />
+            android:layout_below="@+id/detail_intro"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"/>
+
     </RelativeLayout>
-
-
 </RelativeLayout>
