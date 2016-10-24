@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorCoral">
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@color/com_kakao_account_button_background">
 
     <RelativeLayout
         android:padding="10dp"
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="20dp"
+            android:textColor="@color/com_kakao_brown"
             android:textAlignment="center"
             android:text="Today\nEat"
             android:id="@+id/today_tv"
@@ -47,6 +49,7 @@
             android:id="@+id/today_tv2"
             android:textSize="15dp"
             android:layout_marginLeft="26dp"
+            android:textColor="@color/com_kakao_brown"
             android:layout_alignBottom="@+id/imageView"
             android:layout_toRightOf="@+id/today_tv"
             android:layout_toEndOf="@+id/today_tv"
@@ -57,9 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_layout"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp">
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
         <ImageButton
             android:layout_width="130dp"
@@ -107,20 +109,6 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:padding="10dp"
-            android:id="@+id/noodle_btn"
-            android:src="@drawable/noodles_main"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="#00ffffff"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/pizza_btn"
-            android:layout_alignLeft="@+id/pizza_btn"
-            android:layout_alignStart="@+id/pizza_btn" />
-
-        <ImageButton
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:padding="10dp"
             android:id="@+id/pig_btn"
             android:src="@drawable/pig_main"
             android:adjustViewBounds="true"
@@ -145,6 +133,19 @@
             android:layout_alignRight="@+id/noodle_btn"
             android:layout_alignEnd="@+id/noodle_btn"
              />
+
+        <ImageButton
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:padding="10dp"
+            android:id="@+id/noodle_btn"
+            android:src="@drawable/noodles_main"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="#00ffffff"
+            android:layout_below="@+id/pizza_btn"
+            android:layout_alignLeft="@+id/pizza_btn"
+            android:layout_alignStart="@+id/pizza_btn" />
 
     </RelativeLayout>
 

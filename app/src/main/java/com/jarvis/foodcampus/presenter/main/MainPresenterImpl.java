@@ -45,9 +45,13 @@ public class MainPresenterImpl implements MainPresenter {
     public String mainBtnCheck(View v) {
         ImageButton button = (ImageButton) v;
         if(v.getId() == R.id.pizza_btn) {
-
+            mainView.showMessage("Pizza Click");
         } else if (v.getId() == R.id.chicken_btn) {
-
+            mainView.showMessage("Chicken Click");
+        }else if (v.getId() == R.id.noodle_btn) {
+            mainView.showMessage("Noodle Click");
+        }else if (v.getId() == R.id.hansik_btn) {
+            mainView.showMessage("Hansik Click");
         }
 
         return "fine";

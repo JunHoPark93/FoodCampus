@@ -6,16 +6,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
+        android:layout_margin="4dp"
+        android:padding="3dp"
         android:weightSum="1">
 
         <ImageView
-            android:layout_width="700px"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:id="@+id/restaurant_pic"
             android:src="@drawable/chicken"
-            android:layout_weight="0.4"
             android:scaleType="fitXY"
             android:layout_marginBottom="3dp"/>
         <LinearLayout
@@ -23,13 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/pizza_name"
-                android:layout_weight="0.6"
                 android:text="chicken"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textAlignment="center"
+                android:textColor="@color/com_kakao_brown"
+
+                android:layout_marginLeft="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignBottom="@+id/restaurant_pic"
                 android:layout_toLeftOf="@+id/food_image"
