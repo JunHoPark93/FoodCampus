@@ -24,7 +24,7 @@
             android:background="@color/colorPrimaryDark"/>
 
         <ImageView
-            app:srcCompat="@drawable/chicken_icon"
+            app:srcCompat="@drawable/chicken_main"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -192,19 +192,50 @@
             android:text="Introduce My Restorant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/detail_intro"
+            android:layout_marginTop="12dp"
             android:layout_below="@+id/detail_rate_layout"
-            android:layout_margin="10dp"
-            android:id="@+id/detail_intro" />
+            android:layout_alignLeft="@+id/detail_rate_layout"
+            android:layout_alignStart="@+id/detail_rate_layout" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_intro"
+            android:id="@+id/detail_menu_layout">
+
+
+
+        <ImageView
+            android:id="@+id/detail_menu_icon"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+        <TextView
+            android:text="Menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/detail_menu_icon"
+            android:id="@+id/textView" />
+        </RelativeLayout>
         <ExpandableListView
             android:padding="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/detail_expendList"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/detail_intro"
+            android:layout_below="@+id/detail_menu_layout"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="50dp"
+            android:layout_height="wrap_content" />
+
+
 
     </RelativeLayout>
+
 </RelativeLayout>

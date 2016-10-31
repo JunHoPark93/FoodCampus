@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.jarvis.foodcampus.R;
@@ -41,6 +42,10 @@ public class DetailActivity extends BaseActivity implements DetailView {
     TextView detailHour;
     @BindView(R.id.detail_intro)
     TextView detailIntro;
+    @BindView(R.id.detail_review_btn)
+    Button reviewBtn;
+    @BindView(R.id.detail_radio_group)
+    RadioGroup radioGroup;
 
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
@@ -74,6 +79,13 @@ public class DetailActivity extends BaseActivity implements DetailView {
         detailPresenter = new DetailPresenterImpl(this, getApplicationContext());
         detailPresenter.initData();
 
+        reviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioGroup.setVisibility(View.VISIBLE);
+                reviewBtn.setVisibility(View.INVISIBLE);
+            }
+        });
         //     setItem();
 
         //     listView.setAdapter(new DetailAdapter(this, arrayGroup, arrayChild));

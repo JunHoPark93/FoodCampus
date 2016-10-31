@@ -8,21 +8,46 @@
     tools:context=".view.restaurant.RestaurantActivity">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/appbar_padding_top"
+
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/colorGray"
 
         >
+
+        <ImageView
+            android:layout_width="50dp"
+            app:srcCompat="@drawable/icon"
+            android:id="@+id/restaurant_bar_icon"
+            android:background="@color/colorGray"
+            android:layout_height="35dp" />
+
         <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/restaurant_bar_icon"
+            android:background="@color/colorGray"
+            android:id="@+id/restaurant_listview">
 
-            android:background="@color/com_kakao_account_button_background"
-            android:id="@+id/restaurant_listview"></ListView>
+        </ListView>
 
-    </LinearLayout>
+        <TextView
+            android:text="Chicken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/restaurant_listview"
+            android:layout_toRightOf="@+id/restaurant_bar_icon"
+            android:gravity="center_vertical"
+            android:textColor="@color/com_kakao_brown"
+            android:textSize="20dp"
+            android:background="@color/colorGray"
+            android:id="@+id/restautant_bar_tv"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
