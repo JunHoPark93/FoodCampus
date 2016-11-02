@@ -3,6 +3,7 @@ package com.jarvis.foodcampus.presenter.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.jarvis.foodcampus.interactor.LoginInteractor;
 import com.jarvis.foodcampus.model.UserModel;
 import com.jarvis.foodcampus.view.login.LoginView;
 import com.kakao.auth.ISessionCallback;
@@ -23,14 +24,16 @@ import static android.content.Context.MODE_PRIVATE;
 public class LoginPresenterImpl implements LoginPresenter {
 
     private LoginView loginView;
+    private LoginInteractor loginInteractor;
     private SessionCallback callback;
     private Context context;
     private UserModel userModel;
     private SharedPreferences sharedPreferences;
 
-    public LoginPresenterImpl(LoginView loginView, Context context) {
+    public LoginPresenterImpl(LoginView loginView, Context context, LoginInteractor loginInteractor) {
         this.loginView = loginView;
         this.context = context;
+        this.loginInteractor = loginInteractor;
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
@@ -77,9 +80,18 @@ public class LoginPresenterImpl implements LoginPresenter {
                 System.out.println("UserID::::::::::::::::" + result.getId());
                 System.out.println("UserNickname::::::::::::::::" + result.getNickname());
 
-                userModel = new UserModel(result.getId(), result.getNickname());
-                saveUserProfile(userModel); // 유저모델에 저장
+                //userModel = new UserModel(result.getId(), result.getNickname());
+                //saveUserProfile(userModel); // 유저모델에 저장
 
+                // 내장db에 저장
+                loginInteractor.login(result.getId(), result.getNickname());
+                saveUserProfile(new UserModel(result.getId(), result.getNickname()));
+
+
+                /**
+                 *  조건문 & 다이얼로그 걸어서 다 되면 메인화면으로 넘긴다
+                 *  메인에서 리스트뷰에서는 내장db의 데이터를 가져오면 된다
+                 */
                 loginView.redirectSignupActivity(); // 메인화면으로 쏨
 
             }
@@ -104,6 +116,11 @@ public class LoginPresenterImpl implements LoginPresenter {
         editor.putString("serial_number", String.valueOf(userModel.getId()));
         editor.putString("nickname", userModel.getNickName());
         editor.commit();
+
+        /**
+         *  내장 db에 박기
+         */
+
     }
 
 }

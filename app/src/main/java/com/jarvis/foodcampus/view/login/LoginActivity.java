@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.jarvis.foodcampus.R;
+import com.jarvis.foodcampus.interactor.LoginInteractor;
 import com.jarvis.foodcampus.presenter.login.LoginPresenter;
 import com.jarvis.foodcampus.presenter.login.LoginPresenterImpl;
 import com.jarvis.foodcampus.view.main.MainActivity;
@@ -17,14 +18,17 @@ import com.kakao.auth.Session;
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private LoginPresenter loginPresenter;
+    private LoginInteractor loginInteractor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // db관리 객체
+        loginInteractor = new LoginInteractor(this);
         // presenter에서 sharedpreference 사용하려면 context가 있어야 함
-        loginPresenter = new LoginPresenterImpl(this, getApplicationContext());
+        loginPresenter = new LoginPresenterImpl(this, getApplicationContext(), loginInteractor);
     }
 
     @Override

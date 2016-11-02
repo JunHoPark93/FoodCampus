@@ -2,9 +2,13 @@ package com.jarvis.foodcampus.presenter.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.jarvis.foodcampus.DB.DatabaseHelper;
 import com.jarvis.foodcampus.R;
 import com.jarvis.foodcampus.view.main.MainView;
 
@@ -15,6 +19,11 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class MainPresenterImpl implements MainPresenter {
+
+    /**
+     *  테스트
+     */
+    private String dbName = "FoodCampus.db";
 
     private MainView mainView;
     private Context context;
@@ -27,6 +36,7 @@ public class MainPresenterImpl implements MainPresenter {
         this.context = context;
 
         checkUser(); // 유저 체킹 메세지
+        dbCheck();
     }
 
     private void checkUser() {
@@ -34,6 +44,30 @@ public class MainPresenterImpl implements MainPresenter {
         serialNumber = sharedPreferences.getString("serial_number",null);
         nickName = sharedPreferences.getString("nickname",null);
         mainView.showMessage("serial_number: "+serialNumber+"\n"+nickName+"님 안녕");
+    }
+
+    private void dbCheck() {
+
+        SQLiteDatabase db;
+        //db = SQLiteDatabase.openDatabase(dbName, ,1);
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        db = databaseHelper.getReadableDatabase();
+
+        System.out.println("dbCheck진입");
+        String sql = "select * from " + "users";
+        Cursor result = db.rawQuery(sql, null);
+
+        System.out.println("길이"+result.getCount());
+
+        // result(Cursor 객체)가 비어 있으면 false 리턴
+        if(result.moveToFirst()){
+            long id = result.getLong(0);
+            String voca = result.getString(1);
+            Toast.makeText(context, "index= "+id+" voca="+voca, Toast.LENGTH_LONG).show();
+            System.out.println("디비셀렉트"+id+ " " +voca);
+        }
+
+        result.close();
     }
 
     /**
