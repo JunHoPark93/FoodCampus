@@ -24,11 +24,13 @@ public class DatabaseManage {
 
     static class Restaurant implements BaseColumns {
         static final String TABLE_NAME = "restaurant";
-        static final String COLUMN_NAME_ITEM_NAME = "item_name";
-        static final String COLUMN_NAME_DESCRIPTION = "description";
-        static final String COLUMN_NAME_MINIMUM_BID_AMOUNT = "minimum_bid_amount";
-        static final String COLUMN_NAME_TARGET_BID_AMOUNT = "target_bid_amount";
-        static final String COLUMN_NAME_IS_ITEM_SOLD = "is_item_sold";
+        static final String COLUMN_NAME_RESAURANT_ID = "restaurant_id";
+        static final String COLUMN_NAME_CATEGORY_ID = "category_id";
+        static final String COLUMN_NAME_RESTAURANT_NAME = "restaurant_name";
+        static final String COLUMN_NAME_RESAURANT_INFO = "restaurant_info";
+        static final String COLUMN_NAME_PHONE = "phone";
+        static final String COLUMN_NAME_OPEN_TIME = "open_time";
+        static final String COLUMN_NAME_CLOSE_TIME = "close_time";
     }
 
     static class Food implements BaseColumns {

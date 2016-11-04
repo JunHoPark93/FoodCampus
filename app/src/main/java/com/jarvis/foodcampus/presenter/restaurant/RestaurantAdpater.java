@@ -1,7 +1,6 @@
 package com.jarvis.foodcampus.presenter.restaurant;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +56,8 @@ public class RestaurantAdpater extends BaseAdapter {
         RestaurantModel listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        iconImageView.setImageDrawable(listViewItem.getIconDrawable());
-        titleTextView.setText(listViewItem.getTitleStr());
+        //iconImageView.setImageDrawable(listViewItem.getIconDrawable());
+        titleTextView.setText(listViewItem.getRestaurantName());
         //extraTextView.setText(listViewItem.getExtra());
 
         return convertView;
@@ -77,14 +76,17 @@ public class RestaurantAdpater extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수
-    public void addItem(Drawable icon, String title, String extra) {
-        RestaurantModel item = new RestaurantModel();
+    public void addItem(RestaurantModel model) {
+        //RestaurantModel item = new RestaurantModel();
 
-        item.setIconDrawable(icon);
-        item.setTitleStr(title);
-        item.setExtra(extra);
+        //item.setIconDrawable(icon);
+        //item.setTitleStr(title);
+        //item.setExtra(extra);
 
-        listViewItemList.add(item);
+        /**
+         *  모델을 넘겨받아서 애드하자
+         */
+        listViewItemList.add(model);
     }
 
 }

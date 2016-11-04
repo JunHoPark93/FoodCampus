@@ -46,6 +46,9 @@ public class MainPresenterImpl implements MainPresenter {
         mainView.showMessage("serial_number: "+serialNumber+"\n"+nickName+"님 안녕");
     }
 
+    /**
+     *  db 조회 테스트임 하는 방식 익히고 지울 것
+     */
     private void dbCheck() {
 
         SQLiteDatabase db;
@@ -63,8 +66,7 @@ public class MainPresenterImpl implements MainPresenter {
         if(result.moveToFirst()){
             long id = result.getLong(0);
             String voca = result.getString(1);
-            Toast.makeText(context, "index= "+id+" voca="+voca, Toast.LENGTH_LONG).show();
-            System.out.println("디비셀렉트"+id+ " " +voca);
+            Toast.makeText(context, "DB조회테스트 id= "+id+" num="+voca, Toast.LENGTH_LONG).show();
         }
 
         result.close();

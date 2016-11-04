@@ -15,6 +15,8 @@ import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
+import java.net.MalformedURLException;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -82,9 +84,23 @@ public class LoginPresenterImpl implements LoginPresenter {
 
                 //userModel = new UserModel(result.getId(), result.getNickname());
                 //saveUserProfile(userModel); // 유저모델에 저장
+                userModel = new UserModel(result.getId(), result.getNickname());
 
-                // 내장db에 저장
-                loginInteractor.login(result.getId(), result.getNickname());
+                //connectLogin에서 서버 요청후 내장에 다 박는다
+                try {
+                   loginInteractor.connectLogin(userModel);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
+                //loginInteractor.login();
+
+
+                /**
+                 *  이거 위에 코드로 넘기고 밑에줄 나중에 지워
+                 */
+                //loginInteractor.login(result.getId(), result.getNickname());
+
                 saveUserProfile(new UserModel(result.getId(), result.getNickname()));
 
 
@@ -113,7 +129,7 @@ public class LoginPresenterImpl implements LoginPresenter {
         serial_number는 카카오에서 반환해주는 user_id라고 보면됨 이것도 고유값이긴 한데
         DB에 auto increment 설정해서 1부터 자체적으로 user_id 생성할거
 */
-        editor.putString("serial_number", String.valueOf(userModel.getId()));
+        editor.putString("serial_number", String.valueOf(userModel.getApi_id()));
         editor.putString("nickname", userModel.getNickName());
         editor.commit();
 
