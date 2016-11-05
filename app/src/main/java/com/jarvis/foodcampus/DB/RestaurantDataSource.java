@@ -45,14 +45,7 @@ public class RestaurantDataSource {
         values.put(DatabaseManage.Restaurant.COLUMN_NAME_OPEN_TIME, model.getOpenTime());
         values.put(DatabaseManage.Restaurant.COLUMN_NAME_CLOSE_TIME, model.getCloseTime());
 
-        //System.out.println(model.getRestaurantName()+"레스토랑이름");
-
         database.insert(DatabaseManage.Restaurant.TABLE_NAME, null, values);
-
-        //values.put(DatabaseManage.User.COLUMN_NAME_PASSWORD, user.getPassword());
-        //values.put(DatabaseManage.User.COLUMN_NAME_CREATED_TIME, user.getCreatedAt());
-        //long userId = mDatabase.insert(AuctionContract.User.TABLE_NAME, null, values);
-        //return userId;
         Log.i("sqliteAdd","레스토랑데이터추가되었음");
     }
 }

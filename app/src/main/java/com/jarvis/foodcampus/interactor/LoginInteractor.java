@@ -10,6 +10,7 @@ import com.jarvis.foodcampus.DB.DatabaseHelper;
 import com.jarvis.foodcampus.DB.FoodDataSource;
 import com.jarvis.foodcampus.DB.RestaurantDataSource;
 import com.jarvis.foodcampus.DB.UserDataSource;
+import com.jarvis.foodcampus.model.FoodModel;
 import com.jarvis.foodcampus.model.RestaurantModel;
 import com.jarvis.foodcampus.model.UserModel;
 
@@ -44,11 +45,13 @@ public class LoginInteractor {
     private LoginRequest loginRequest;
 
     private RestaurantModel[] restaurantModels; // 서버에서 받아온거 내장에 박기위한 모델
+    private FoodModel[] foodModels; // 위와 같음
 
     public LoginInteractor(Context context) {
 
         userDataSource = new UserDataSource(context);
         restaurantDataSource = new RestaurantDataSource(context);
+        foodDataSource = new FoodDataSource(context);
         this.context = context;
         databaseHelper = new DatabaseHelper(context);
     }
@@ -132,7 +135,7 @@ public class LoginInteractor {
                     //JSONArray reviews = jObject.getJSONArray("reviews");
 
                     System.out.println(restaurants);
-                    System.out.println(foods);
+                    System.out.println("음식데이터 제이슨배열"+foods);
                     //System.out.println(reviews);
 
                     JSONObject temp = results.getJSONObject(0);
@@ -151,9 +154,12 @@ public class LoginInteractor {
                      *  login먼저 호출 (유저 아이디, 닉네임)
                      *  이거 먼저 호출하면 디비 날리고 초기화
                      */
+                    //////////////////////////////////////////////////////// 레스토랑시작
+
                     restaurantModels = new RestaurantModel[restaurants.length()]; // 레스토랑 모델 json옵젝 갯수만큼 초기화
 
                     System.out.println("레스토랑모델갯수"+restaurants.length());
+
                     for(int i=0; i<restaurants.length(); i++) {
                         JSONObject resTemp = restaurants.getJSONObject(i);
                         System.out.println("제이슨"+resTemp.toString());
@@ -171,13 +177,33 @@ public class LoginInteractor {
                                 resName, resInfo, resPhone, resOpenTime, resCloseTime);
 
                         System.out.println("잘들어"+restaurantModels[i].getRestaurantName());
+
+                        /////////////////////////////////////////////////////////////////레스토랑끝
                     }
+
+
+                    /////////////////////////////////////////////////////////////////푸드 시작
+                    foodModels = new FoodModel[foods.length()];
+
+                    for(int i=0; i<foods.length(); i++) {
+                        JSONObject foodTemp = foods.getJSONObject(i);
+                        System.out.println("푸드제이슨"+foodTemp.toString());
+
+                        String foodId = foodTemp.getString("FOOD_ID");
+                        String resId = foodTemp.getString("RESTAURANT_ID");
+                        String foodName = foodTemp.getString("FOOD_NAME");
+                        String foodPrice = foodTemp.getString("FOOD_PRICE");
+                        String foodInfo = foodTemp.getString("FOOD_INFO");
+
+                        foodModels[i] = new FoodModel(Integer.parseInt(foodId), Integer.parseInt(resId),
+                                foodName, foodPrice, foodInfo);
+                    }
+
+                    /////////////////////////////////////////////////////////////////푸드 끝
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                //login(userModel, restaurantModels);
 
                 login();
             }
@@ -199,29 +225,13 @@ public class LoginInteractor {
         database.execSQL("DELETE FROM users");
         database.execSQL("DELETE FROM restaurant");
 
-        //database.close();
 
         // db열어서 유저일단 저장
         userDataSource.open();
         userDataSource.addUser(userModel);
-        //userDataSource.close();
 
-
-        System.out.println("login()내부 레스토랑"+restaurantModels[0].getRestaurantName());
-        // 레스토랑 데이터 저장
         addRestaurantData(restaurantModels);
-
-        //addRestaurantData(new RestaurantModel(1,1,"가마손","ㅇㅇ","010","22:00","11:00"));
-
-//        restaurantDataSource.open();
-//        RestaurantModel restaurantModel = new RestaurantModel(1,1,"가마손","ㅇㅇ","010","22:00","11:00");
-//        restaurantDataSource.addRestaurant(restaurantModel);
-//        restaurantModel = new RestaurantModel(2,3,"두목치킨","맛잇어","0109999","11:00","10:00");
-//        restaurantDataSource.addRestaurant(restaurantModel);
-
-        /**
-         *  내장db에 다 박았어
-         */
+        addFoodData(foodModels);
     }
 
     /**
@@ -231,11 +241,18 @@ public class LoginInteractor {
     public void addRestaurantData(RestaurantModel[] restaurantModels) {
 
         restaurantDataSource.open();
+
         for(int i=0; i<restaurantModels.length; i++) {
             restaurantDataSource.addRestaurant(restaurantModels[i]);
         }
-
-        //restaurantDataSource.addRestaurant(restaurantModels);
     }
 
+    public void addFoodData(FoodModel[] foodModels) {
+
+        foodDataSource.open();
+
+        for(int i=0; i<foodModels.length; i++) {
+            foodDataSource.addFood(foodModels[i]);
+        }
+    }
 }

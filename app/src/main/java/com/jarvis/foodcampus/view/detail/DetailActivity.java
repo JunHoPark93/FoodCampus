@@ -50,7 +50,6 @@ public class DetailActivity extends BaseActivity implements DetailView {
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
 
-
     @OnClick(R.id.detail_phone_btn)
     public void onClick(View v) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(detailPhoneBtn.getText().toString().toLowerCase()));
@@ -62,9 +61,22 @@ public class DetailActivity extends BaseActivity implements DetailView {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
+        /**
+         *  인텐트 받는부분인데 뷰에서 하면 안되는 기능인데 어떻게 빼지
+         *  /////////////////////////////////////////////////
+         */
+        String res = getIntent().getStringExtra("restaurantId");
+        /**
+         *  여기까지
+         *  /////////////////////////////////////////
+         */
+
+
+
         listView = (ExpandableListView) this.findViewById(R.id.detail_expendList);
 
-        //임시로 일케 연결함 intent로 넘겨주세요
+        //임시로 일케 연결함 intent로 넘겨주세요 ㅇㅋ
+        /**
         detailName.setText("은비네 두마리 치킨");
         detailGrade.setText("좋아요 : 10 / 싫어요 : 5");
         detailOrder.setText("총 주문수 : 8회");
@@ -72,11 +84,14 @@ public class DetailActivity extends BaseActivity implements DetailView {
         detailIntro.setText("안녕하세요? \nJarvis 팀이 만든 Application\n [ 푸드캠퍼스 ] 입니다. \n 맛잇는거 많이 시켜드세용");
 
         detailPhoneBtn.setText("tel:010-5520-5333");
+         */
 
         detailAdapter = new DetailAdapter(this);
         listView.setAdapter(detailAdapter);
 
         detailPresenter = new DetailPresenterImpl(this, getApplicationContext());
+        detailPresenter.whichFood(res);
+        detailPresenter.getFoodData();
         detailPresenter.initData();
 
         reviewBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +101,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 reviewBtn.setVisibility(View.INVISIBLE);
             }
         });
+
         //     setItem();
 
         //     listView.setAdapter(new DetailAdapter(this, arrayGroup, arrayChild));
@@ -94,8 +110,19 @@ public class DetailActivity extends BaseActivity implements DetailView {
     }
 
 
+
     @Override
     public void add(ArrayList<String> arrayGroup, HashMap<String, ArrayList<DetailModel>> arrayChild) {
         detailAdapter.addItem(arrayGroup, arrayChild);
+    }
+
+    /**
+     *  뷰 (레이아웃) 설정 메소드 설정하고 프레젠터에서 넘겨받고 여기서 단순히 세팅만 해줄거임
+     */
+
+    public void setDisplay(String name, String hour, String phone) {
+        detailName.setText(name);
+        detailHour.setText(hour);
+        detailPhoneBtn.setText(phone);
     }
 }

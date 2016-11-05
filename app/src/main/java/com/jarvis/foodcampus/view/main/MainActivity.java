@@ -34,7 +34,9 @@ public class MainActivity extends BaseActivity implements MainView {
         // 혹시 다른 버튼의 기능이 추가될 수도 있으므로
         String btnCheck = mainPresenter.mainBtnCheck(v);
 
+        // 어떤 레스토랑(치킨,피자...)이 눌렸는지에 대한 정보를 같이 넘김
         Intent intent = new Intent(getApplicationContext(), RestaurantActivity.class);
+        intent.putExtra("restaurant",btnCheck);
         startActivity(intent);
     }
 

@@ -6,4 +6,5 @@ package com.jarvis.foodcampus.presenter.restaurant;
 
 public interface RestaurantPrestenter {
     void initData();
+    void whichRestaurant(String restaurant);
 }

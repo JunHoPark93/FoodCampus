@@ -42,16 +42,9 @@ public class UserDataSource {
     public void addUser(UserModel user) {
         ContentValues values = new ContentValues();
         values.put(DatabaseManage.User.COLUMN_NAME_USER_ID, user.getApi_id());
-        //values.put(DatabaseManage.User.COLUMN_NAME_USER_ID, "text");
         values.put(DatabaseManage.User.COLUMN_NAME_USER_NICKNAME, user.getNickName());
-        //values.put(DatabaseManage.User.COLUMN_NAME_USER_NICKNAME, "nick");
-        //System.out.println("유저데이터 삽입 완료 "+user.getApi_id()+user.getNickName());
 
         database.insert(DatabaseManage.User.TABLE_NAME, null, values);
         Log.i("sqliteAdd","유저데이터추가되었음");
-        //values.put(DatabaseManage.User.COLUMN_NAME_PASSWORD, user.getPassword());
-        //values.put(DatabaseManage.User.COLUMN_NAME_CREATED_TIME, user.getCreatedAt());
-        //long userId = mDatabase.insert(AuctionContract.User.TABLE_NAME, null, values);
-        //return userId;
     }
 }

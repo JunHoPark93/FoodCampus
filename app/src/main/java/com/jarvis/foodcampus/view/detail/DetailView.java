@@ -12,4 +12,5 @@ import java.util.HashMap;
 public interface DetailView {
 
     void add(ArrayList<String> arrayGroup, HashMap<String, ArrayList<DetailModel>> arrayChild);
+    void setDisplay(String name, String hour, String phone);
 }

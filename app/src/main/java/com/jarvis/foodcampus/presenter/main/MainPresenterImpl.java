@@ -64,8 +64,8 @@ public class MainPresenterImpl implements MainPresenter {
 
         // result(Cursor 객체)가 비어 있으면 false 리턴
         if(result.moveToFirst()){
-            long id = result.getLong(0);
-            String voca = result.getString(1);
+            long id = result.getLong(1);
+            String voca = result.getString(2);
             Toast.makeText(context, "DB조회테스트 id= "+id+" num="+voca, Toast.LENGTH_LONG).show();
         }
 
@@ -82,14 +82,18 @@ public class MainPresenterImpl implements MainPresenter {
         ImageButton button = (ImageButton) v;
         if(v.getId() == R.id.pizza_btn) {
             mainView.showMessage("Pizza Click");
+            return "pizza";
         } else if (v.getId() == R.id.chicken_btn) {
             mainView.showMessage("Chicken Click");
+            return "chicken";
         }else if (v.getId() == R.id.noodle_btn) {
-            mainView.showMessage("Noodle Click");
+            mainView.showMessage("Chinese Click");
+            return "chinese";
         }else if (v.getId() == R.id.hansik_btn) {
-            mainView.showMessage("Hansik Click");
+            mainView.showMessage("Korean Click");
+            return "korean";
+        } else {
+            return "failed"; // 예외처리 어떻게할까?
         }
-
-        return "fine";
     }
 }

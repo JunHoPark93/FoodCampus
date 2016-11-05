@@ -35,7 +35,21 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
 
         listView.setAdapter(restaurantAdpater);
 
+        /**
+         *  인텐트 받는부분인데 뷰에서 하면 안되는 기능인데 어떻게 빼지
+         *  /////////////////////////////////////////////////
+         */
+        Intent intentGet = getIntent();
+        String res = intentGet.getStringExtra("restaurant");
+        /**
+         *  여기까지
+         *  /////////////////////////////////////////
+         */
+
+
         restaurantPrestenter = new RestaurantPresenterImpl(this, getApplicationContext());
+        restaurantPrestenter.whichRestaurant(res);
+
         restaurantPrestenter.initData();
 
         listView.setOnItemClickListener(this);
@@ -54,7 +68,9 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
         // 나중엔 position 에따라 달라짐
         // 인텐트
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("restaurantId",String.valueOf(restaurantModel.getRestaurantId())); // 넘어갈때 레스토랑id 같이 넘김
+
         startActivity(intent);
-        //finish(); 피니시를 해야될까
+        finish(); //피니시를 해야될까
     }
 }

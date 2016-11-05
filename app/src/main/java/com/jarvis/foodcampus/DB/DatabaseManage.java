@@ -35,13 +35,10 @@ public class DatabaseManage {
 
     static class Food implements BaseColumns {
         static final String TABLE_NAME = "food";
-        static final String COLUMN_NAME_USER_ID = "user_id";
-        static final String COLUMN_NAME_ITEM_ID = "item_id";
-        static final String COLUMN_NAME_BID_AMOUNT = "bid_amount";
-        static final String COLUMN_NAME_BID_TIME = "bid_time";
-        static final String COLUMN_NAME_BID_STATUS = "bid_status";
+        static final String COLUMN_NAME_FOOD_ID = "user_id";
+        static final String COLUMN_NAME_RESTAURANT_ID = "restaurant_id";
+        static final String COLUMN_NAME_FOOD_NAME = "food_name";
+        static final String COLUMN_NAME_FOOD_PRICE = "food_price";
+        static final String COLUMN_NAME_FOOD_INFO = "food_info";
     }
-
-
-
 }
