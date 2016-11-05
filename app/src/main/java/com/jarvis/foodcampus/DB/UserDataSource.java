@@ -41,10 +41,10 @@ public class UserDataSource {
      */
     public void addUser(UserModel user) {
         ContentValues values = new ContentValues();
-        //values.put(DatabaseManage.User.COLUMN_NAME_USER_ID, user.getApi_id());
-        values.put(DatabaseManage.User.COLUMN_NAME_USER_ID, "text");
-        //values.put(DatabaseManage.User.COLUMN_NAME_USER_NICKNAME, user.getNickName());
-        values.put(DatabaseManage.User.COLUMN_NAME_USER_NICKNAME, "nick");
+        values.put(DatabaseManage.User.COLUMN_NAME_USER_ID, user.getApi_id());
+        //values.put(DatabaseManage.User.COLUMN_NAME_USER_ID, "text");
+        values.put(DatabaseManage.User.COLUMN_NAME_USER_NICKNAME, user.getNickName());
+        //values.put(DatabaseManage.User.COLUMN_NAME_USER_NICKNAME, "nick");
         //System.out.println("유저데이터 삽입 완료 "+user.getApi_id()+user.getNickName());
 
         database.insert(DatabaseManage.User.TABLE_NAME, null, values);

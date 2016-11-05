@@ -1,7 +1,6 @@
 package com.jarvis.foodcampus.view.restaurant;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,14 +42,14 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
     }
 
     @Override
-    public void add(Drawable icon, String str1, String str2) {
-        restaurantAdpater.addItem(icon, str1, str2);
+    public void add(RestaurantModel restaurantModel) {
+        restaurantAdpater.addItem(restaurantModel);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        RestaurantModel pizzaViewItem = (RestaurantModel) parent.getItemAtPosition(position);
-        Toast.makeText(getApplicationContext(),"position"+position+"  "+pizzaViewItem.getTitleStr(), Toast.LENGTH_SHORT ).show();
+        RestaurantModel restaurantModel = (RestaurantModel) parent.getItemAtPosition(position);
+        Toast.makeText(getApplicationContext(),"position"+position+"  "+restaurantModel.getCategoryId(), Toast.LENGTH_SHORT ).show();
 
         // 나중엔 position 에따라 달라짐
         // 인텐트

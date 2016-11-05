@@ -151,8 +151,6 @@ public class LoginInteractor {
                      *  login먼저 호출 (유저 아이디, 닉네임)
                      *  이거 먼저 호출하면 디비 날리고 초기화
                      */
-
-
                     restaurantModels = new RestaurantModel[restaurants.length()]; // 레스토랑 모델 json옵젝 갯수만큼 초기화
 
                     System.out.println("레스토랑모델갯수"+restaurants.length());
@@ -202,12 +200,6 @@ public class LoginInteractor {
         database.execSQL("DELETE FROM restaurant");
 
         //database.close();
-
-        /**
-         *  여기다가
-         *  서버 요청 ~
-         */
-
 
         // db열어서 유저일단 저장
         userDataSource.open();
