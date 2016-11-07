@@ -22,6 +22,7 @@ import com.jarvis.foodcampus.presenter.base.BasePresenterImpl;
 import com.jarvis.foodcampus.view.login.LoginActivity;
 import com.jarvis.foodcampus.view.main.MainActivity;
 import com.jarvis.foodcampus.view.restaurant.RestaurantActivity;
+import com.jarvis.foodcampus.view.schoolfood.SchoolFoodActivity;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
@@ -163,6 +164,7 @@ public abstract class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent;
 
         switch (id) {
             case R.id.nav_home:
@@ -172,26 +174,37 @@ public abstract class BaseActivity extends AppCompatActivity
 
             case R.id.nav_dorm:
                 //createBackStack(new Intent(this, DormActivity.class));
+                createBackStack(new Intent(this, SchoolFoodActivity.class));
                 finish();
                 break;
 
             case R.id.nav_pizza:
-                createBackStack(new Intent(this, RestaurantActivity.class));
+                intent = new Intent(this,RestaurantActivity.class);
+                intent.putExtra("restaurant","pizza");
+                createBackStack(intent);
                 finish();
                 break;
 
             case R.id.nav_chicken:
-                //createBackStack(new Intent(this, ChickenActivity.class));
+                intent = new Intent(this,RestaurantActivity.class);
+                intent.putExtra("restaurant","chicken");
+                createBackStack(intent);
                 finish();
                 break;
 
             case R.id.nav_korean:
                 //createBackStack(new Intent(this, KoreanActivity.class));
+                intent = new Intent(this,RestaurantActivity.class);
+                intent.putExtra("restaurant","korean");
+                createBackStack(intent);
                 finish();
                 break;
 
-            case R.id.nav_flour:
+            case R.id.nav_chinese:
                 //createBackStack(new Intent(this, FlourActivity.class));
+                intent = new Intent(this,RestaurantActivity.class);
+                intent.putExtra("restaurant","chinese");
+                createBackStack(intent);
                 finish();
                 break;
 
