@@ -192,11 +192,12 @@ public class LoginInteractor {
                         String foodId = foodTemp.getString("FOOD_ID");
                         String resId = foodTemp.getString("RESTAURANT_ID");
                         String foodName = foodTemp.getString("FOOD_NAME");
+                        String foodGroup = foodTemp.getString("FOOD_GROUP");
                         String foodPrice = foodTemp.getString("FOOD_PRICE");
                         String foodInfo = foodTemp.getString("FOOD_INFO");
 
                         foodModels[i] = new FoodModel(Integer.parseInt(foodId), Integer.parseInt(resId),
-                                foodName, foodPrice, foodInfo);
+                                foodName, foodGroup, foodPrice, foodInfo);
                     }
 
                     /////////////////////////////////////////////////////////////////푸드 끝
@@ -224,11 +225,15 @@ public class LoginInteractor {
         database = databaseHelper.getWritableDatabase();
         database.execSQL("DELETE FROM users");
         database.execSQL("DELETE FROM restaurant");
+        database.execSQL("DELETE FROM food");
+
+        database.close();
 
 
         // db열어서 유저일단 저장
         userDataSource.open();
         userDataSource.addUser(userModel);
+        userDataSource.close();
 
         addRestaurantData(restaurantModels);
         addFoodData(foodModels);
@@ -245,6 +250,8 @@ public class LoginInteractor {
         for(int i=0; i<restaurantModels.length; i++) {
             restaurantDataSource.addRestaurant(restaurantModels[i]);
         }
+
+        restaurantDataSource.close();
     }
 
     public void addFoodData(FoodModel[] foodModels) {
@@ -254,5 +261,7 @@ public class LoginInteractor {
         for(int i=0; i<foodModels.length; i++) {
             foodDataSource.addFood(foodModels[i]);
         }
+
+        foodDataSource.close();
     }
 }

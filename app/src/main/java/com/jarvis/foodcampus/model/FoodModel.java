@@ -10,13 +10,15 @@ public class FoodModel {
     private int restaurantId;
     private String foodName;
     private String foodPrice;
+    private String foodGroup;
     private String foodInfo;
 
-    public FoodModel(int foodId, int restaurantId, String foodName, String foodPrice, String foodInfo) {
+    public FoodModel(int foodId, int restaurantId, String foodName, String foodPrice, String foodGroup, String foodInfo) {
         this.foodId = foodId;
         this.restaurantId = restaurantId;
         this.foodName = foodName;
         this.foodPrice = foodPrice;
+        this.foodGroup = foodGroup;
         this.foodInfo = foodInfo;
     }
 
@@ -50,6 +52,14 @@ public class FoodModel {
 
     public void setFoodPrice(String foodPrice) {
         this.foodPrice = foodPrice;
+    }
+
+    public String getFoodGroup() {
+        return foodGroup;
+    }
+
+    public void setFoodGroup(String foodGroup) {
+        this.foodGroup = foodGroup;
     }
 
     public String getFoodInfo() {

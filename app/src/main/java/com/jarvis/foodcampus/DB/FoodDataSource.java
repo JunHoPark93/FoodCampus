@@ -35,6 +35,7 @@ public class FoodDataSource {
         values.put(DatabaseManage.Food.COLUMN_NAME_FOOD_ID, model.getFoodId());
         values.put(DatabaseManage.Food.COLUMN_NAME_RESTAURANT_ID, model.getRestaurantId());
         values.put(DatabaseManage.Food.COLUMN_NAME_FOOD_NAME, model.getFoodName());
+        values.put(DatabaseManage.Food.COLUMN_NAME_FOOD_GROUP, model.getFoodGroup());
         values.put(DatabaseManage.Food.COLUMN_NAME_FOOD_PRICE, model.getFoodPrice());
         values.put(DatabaseManage.Food.COLUMN_NAME_FOOD_INFO, model.getFoodInfo());
 

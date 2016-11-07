@@ -38,6 +38,7 @@ public class DatabaseManage {
         static final String COLUMN_NAME_FOOD_ID = "user_id";
         static final String COLUMN_NAME_RESTAURANT_ID = "restaurant_id";
         static final String COLUMN_NAME_FOOD_NAME = "food_name";
+        static final String COLUMN_NAME_FOOD_GROUP = "food_group";
         static final String COLUMN_NAME_FOOD_PRICE = "food_price";
         static final String COLUMN_NAME_FOOD_INFO = "food_info";
     }

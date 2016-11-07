@@ -38,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseManage.Food.COLUMN_NAME_FOOD_ID + " INTEGER, " +
             DatabaseManage.Food.COLUMN_NAME_RESTAURANT_ID + " INTEGER, " +
             DatabaseManage.Food.COLUMN_NAME_FOOD_NAME + " TEXT, " +
+            DatabaseManage.Food.COLUMN_NAME_FOOD_GROUP + " TEXT, " +
             DatabaseManage.Food.COLUMN_NAME_FOOD_PRICE + " TEXT, " +
             DatabaseManage.Food.COLUMN_NAME_FOOD_INFO + " TEXT )";
 
