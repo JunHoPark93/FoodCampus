@@ -24,6 +24,7 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
     private ListView listView;
     private RestaurantAdpater restaurantAdpater;
     private RestaurantPrestenter restaurantPrestenter;
+    private String res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,6 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
 
         listView = (ListView) findViewById(R.id.restaurant_listview);
         restaurantAdpater = new RestaurantAdpater();
-
         listView.setAdapter(restaurantAdpater);
 
         /**
@@ -40,7 +40,7 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
          *  /////////////////////////////////////////////////
          */
         Intent intentGet = getIntent();
-        String res = intentGet.getStringExtra("restaurant");
+        res = intentGet.getStringExtra("restaurant");
         /**
          *  여기까지
          *  /////////////////////////////////////////
@@ -52,7 +52,9 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
 
         restaurantPrestenter.initData();
 
+        System.out.println(restaurantAdpater.getCount()+"레스토랑뷰사이즈");
         listView.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -69,8 +71,8 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
         // 인텐트
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("restaurantId",String.valueOf(restaurantModel.getRestaurantId())); // 넘어갈때 레스토랑id 같이 넘김
-
+        intent.putExtra("categoryId",res); // 디테일액티비티에서 그림아이콘 설정하기 위해서 넘김
         startActivity(intent);
-        finish(); //피니시를 해야될까
+        //finish(); //피니시를 해야될까
     }
 }

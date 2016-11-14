@@ -3,9 +3,11 @@ package com.jarvis.foodcampus.presenter.detail;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 import com.jarvis.foodcampus.DB.DatabaseHelper;
+import com.jarvis.foodcampus.R;
 import com.jarvis.foodcampus.model.DetailModel;
 import com.jarvis.foodcampus.model.FoodModel;
 import com.jarvis.foodcampus.view.detail.DetailView;
@@ -21,11 +23,12 @@ public class DetailPresenterImpl implements DetailPresenter {
 
     private DetailView detailView;
     private Context context;
-    private String whichRestaurant;
+    private String restaurant;
+    private String category;
     private SQLiteDatabase database;
     private DatabaseHelper databaseHelper;
     private FoodModel[] foodModels;
-
+    private Drawable resIcon;
 
     private ArrayList<String> arrayGroup = new ArrayList<>();
     private HashMap<String, ArrayList<DetailModel>> arrayChild = new HashMap<>();
@@ -38,20 +41,27 @@ public class DetailPresenterImpl implements DetailPresenter {
         database = databaseHelper.getReadableDatabase();
     }
 
-    public void whichFood(String restaurant) {
+    public String getRestaurant() {
+        return restaurant;
+    }
 
-        whichRestaurant = restaurant;
-        System.out.println("레스토랑"+whichRestaurant);
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void getFoodData() {
 
         // 어느 음식점에서 꺼내올지?
-        String sql = "SELECT * FROM " + "food " + "WHERE "+"restaurant_id = "+ "'" + whichRestaurant + "'";
+        String sql = "SELECT * FROM " + "food " + "WHERE "+"restaurant_id = "+ "'" + restaurant + "'";
         Cursor result = database.rawQuery(sql, null);
 
         foodModels = new FoodModel[result.getCount()];
         System.out.println("푸드 디비길이"+result.getCount());
+
 
         if(result.moveToFirst()) {
             for(int i=0; i<result.getCount(); i++) {
@@ -59,27 +69,67 @@ public class DetailPresenterImpl implements DetailPresenter {
                 int restaurantId = result.getInt(2);
                 String foodName = result.getString(3);
                 String foodPrice = result.getString(4);
-                String foodInfo = result.getString(5);
-                foodModels[i] = new FoodModel(foodId, restaurantId, foodName, foodPrice, foodInfo);
+                String foodGroup = result.getString(5);
+                String foodInfo = result.getString(6);
+                System.out.println("foodId"+foodId+"resId"+restaurantId+"foodName"+foodName+"foodGroup"+foodGroup
+                        +"가격:"+foodPrice+" 인푀"+foodInfo);
+                foodModels[i] = new FoodModel(foodId, restaurantId, foodName, foodPrice, foodGroup, foodInfo);
 
                 result.moveToNext();
             }
         }
+
+        result.close();
+        database.close();
     }
 
     public void getSingleRestaurantData() {
-        String sql = "SELECT * FROM " + "restaurant " + "WHERE "+"restaurant_id = "+ "'" + whichRestaurant + "'";
+        String sql = "SELECT * FROM " + "restaurant " + "WHERE "+"restaurant_id = "+ "'" + restaurant + "'";
         Cursor result = database.rawQuery(sql, null);
+
+        resIcon = getRestaruantIcon(category);
 
         if(result.moveToFirst()) {
             String resName = result.getString(3);
-            String resHour = result.getString(6);
+            String resHour = result.getString(6) + " ~ "+ result.getString(7);
             String resPhone = result.getString(5);
 
-            detailView.setDisplay(resName, resHour, resPhone);
+
+            System.out.println("선택된카테고리"+category);
+            detailView.setDisplay(resName, resHour, resPhone, resIcon);
 
         }
+        result.close();
+        database.close();
 
+    }
+
+    private Drawable getRestaruantIcon(String category) {
+        switch (category) {
+            case "chicken":
+                resIcon = context.getResources().getDrawable(R.drawable.chicken_main);
+                break;
+
+            case "chinese":
+                resIcon = context.getResources().getDrawable(R.drawable.noodles_main);
+                break;
+
+            case "korean":
+                resIcon = context.getResources().getDrawable(R.drawable.rice_main);
+                break;
+
+            case "pizza":
+                resIcon = context.getResources().getDrawable(R.drawable.pizza_main);
+                break;
+
+            case "5":
+                break;
+
+            case "6":
+                break;
+        }
+
+        return resIcon;
     }
 
 
@@ -88,49 +138,57 @@ public class DetailPresenterImpl implements DetailPresenter {
      */
     public void initData() {
 
+        database = databaseHelper.getReadableDatabase();
+
         ArrayList<String> arrayList = new ArrayList<>();
         HashMap<String, String> hashMap = new HashMap<>();
 
         try {
-            hashMap.put(foodModels[0].getFoodInfo(), foodModels[0].getFoodInfo());
-            arrayList.add(foodModels[0].getFoodInfo());
+            hashMap.put(foodModels[0].getFoodGroup(), foodModels[0].getFoodGroup());
+            arrayList.add(foodModels[0].getFoodGroup());
+
+            for(int i=0; i<foodModels.length; i++) {
+
+                if(hashMap.containsValue(foodModels[i].getFoodGroup()))
+                    continue;
+                else {
+                    hashMap.put(foodModels[i].getFoodGroup(), foodModels[i].getFoodGroup());
+                    arrayList.add(foodModels[i].getFoodGroup());
+                }
+
+            }
+
+            for(int i=0; i<arrayList.size(); i++) {
+                arrayGroup.add(arrayList.get(i)); // 그룹에 음식 인포 저장
+            }
+
+            //arrayList.get(i) == foodModels[i].getFoodGroup() -> 둘이 묶어준다
+
+            // 이 arraylist배열은 각 그룹에 해당하는 차일드 리스트배열이다
+            ArrayList<DetailModel>[] listArray = new ArrayList[arrayList.size()];
+
+            // listarray와 arraylist의 인덱스는 같다
+            for(int i=0; i<arrayList.size(); i++) {
+                listArray[i] = new ArrayList<DetailModel>();
+
+                for(int k=0; k<foodModels.length; k++) {
+
+                    if(arrayList.get(i).equals(foodModels[k].getFoodGroup())) {
+                        listArray[i].add(new DetailModel(arrayList.get(i),foodModels[k].getFoodName()
+                                ,foodModels[k].getFoodInfo(), foodModels[k].getFoodPrice()));
+                    }
+                }
+                arrayChild.put(arrayGroup.get(i), listArray[i]);
+
+            }
+            detailView.add(arrayGroup, arrayChild);
+            getSingleRestaurantData();
+
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("에러터지는건 카테고리에 음식점이 하나도없어서 그럼");
-            Toast.makeText(context, "음식점 정보가 하나도 없습니다", Toast.LENGTH_LONG).show();
+            System.out.println("에러터지는건 등록된 음식이 하나도없어서 그럼");
+            Toast.makeText(context, "음식 정보가 하나도 없습니다", Toast.LENGTH_LONG).show();
         }
-
-        for(int i=0; i<foodModels.length; i++) {
-
-            if(hashMap.containsValue(foodModels[i].getFoodInfo()))
-                continue;
-            else
-                hashMap.put(foodModels[i].getFoodInfo(), foodModels[i].getFoodInfo());
-                arrayList.add(foodModels[i].getFoodInfo());
-        }
-
-        for(int i=0; i<arrayList.size(); i++) {
-            arrayGroup.add(arrayList.get(i)); // 그룹에 음식 인포 저장
-        }
-
-        //arrayList.get(i) == foodModels[i].getFoodInfo() -> 둘이 묶어준다
-
-        // 이 arraylist배열은 각 그룹에 해당하는 리스트배열이다
-        ArrayList<DetailModel>[] listArray = new ArrayList[arrayList.size()];
-
-        // listarray와 arraylist의 인덱스는 같다
-        for(int i=0; i<arrayList.size(); i++) {
-            listArray[i] = new ArrayList<DetailModel>();
-            for(int k=0; k<foodModels.length; k++) {
-                if(arrayList.get(i) == foodModels[k].getFoodInfo()) {
-                    listArray[i].add(new DetailModel(arrayList.get(i),foodModels[k].getFoodName()
-                    ,foodModels[i].getFoodName(), Integer.parseInt(foodModels[k].getFoodPrice())));
-                }
-            }
-            arrayChild.put(arrayGroup.get(i), listArray[i]);
-        }
-        detailView.add(arrayGroup, arrayChild);
-        getSingleRestaurantData();
 
         /*
         디폴트 코드

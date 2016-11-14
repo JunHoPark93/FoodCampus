@@ -12,11 +12,15 @@ public class DetailModel {
     private String size;
 
 
-    public DetailModel(String group, String foodname, String price, String size) {
+    public DetailModel(String group, String foodname,  String size, String price) {
         this.foodname = foodname;
         this.group = group;
         this.price = price;
-        this.size = size;
+        if(size.equals("EMPTY")) {
+            this.size = "";
+        } else {
+            this.size = size;
+        }
     }
 
     public String getFoodname() {

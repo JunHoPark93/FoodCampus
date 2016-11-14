@@ -38,14 +38,22 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
             case "chicken":
                 whichRestaurant = 1;
                 break;
-            case "chinese":
+            case "pizza":
                 whichRestaurant = 2;
                 break;
             case "korean":
                 whichRestaurant = 3;
                 break;
-            case "pizza":
+            case "chinese":
                 whichRestaurant = 4;
+                break;
+
+            case "night":
+                whichRestaurant = 5;
+                break;
+
+            case "japanese":
+                whichRestaurant = 6;
                 break;
 
             default:
@@ -85,5 +93,7 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
                 result.moveToNext(); // 칼럼한줄내려
             }
         }
+
+        database.close();
     }
 }

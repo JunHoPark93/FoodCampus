@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import com.jarvis.foodcampus.DB.DatabaseHelper;
 import com.jarvis.foodcampus.DB.FoodDataSource;
+import com.jarvis.foodcampus.DB.OrderDataSource;
 import com.jarvis.foodcampus.DB.RestaurantDataSource;
+import com.jarvis.foodcampus.DB.ReviewDataSource;
 import com.jarvis.foodcampus.DB.UserDataSource;
 import com.jarvis.foodcampus.model.FoodModel;
 import com.jarvis.foodcampus.model.RestaurantModel;
@@ -38,6 +40,8 @@ public class LoginInteractor {
     private UserDataSource userDataSource;
     private RestaurantDataSource restaurantDataSource;
     private FoodDataSource foodDataSource;
+    private OrderDataSource orderDataSource;
+    private ReviewDataSource reviewDataSource;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase database;
     private Context context;
@@ -52,6 +56,9 @@ public class LoginInteractor {
         userDataSource = new UserDataSource(context);
         restaurantDataSource = new RestaurantDataSource(context);
         foodDataSource = new FoodDataSource(context);
+        orderDataSource = new OrderDataSource(context);
+        reviewDataSource = new ReviewDataSource(context);
+
         this.context = context;
         databaseHelper = new DatabaseHelper(context);
     }
@@ -133,6 +140,7 @@ public class LoginInteractor {
                     JSONArray restaurants = jObject.getJSONArray("restaurants");
                     JSONArray foods = jObject.getJSONArray("foods");
                     //JSONArray reviews = jObject.getJSONArray("reviews");
+                    //JSONArray order = jObject.getJSONArray("order");
 
                     System.out.println(restaurants);
                     System.out.println("음식데이터 제이슨배열"+foods);
@@ -178,11 +186,11 @@ public class LoginInteractor {
 
                         System.out.println("잘들어"+restaurantModels[i].getRestaurantName());
 
-                        /////////////////////////////////////////////////////////////////레스토랑끝
+                        /////////////////////////////////////////////////////////////////  레스토랑끝
                     }
 
 
-                    /////////////////////////////////////////////////////////////////푸드 시작
+                    /////////////////////////////////////////////////////////////////  푸드 시작
                     foodModels = new FoodModel[foods.length()];
 
                     for(int i=0; i<foods.length(); i++) {
@@ -200,7 +208,28 @@ public class LoginInteractor {
                                 foodName, foodGroup, foodPrice, foodInfo);
                     }
 
-                    /////////////////////////////////////////////////////////////////푸드 끝
+                    /////////////////////////////////////////////////////////////////  푸드 끝
+
+
+                    ////////////////////////////////////////////////////////////////  주문 시작
+
+
+                    // 코드작성 here
+
+
+                    ////////////////////////////////////////////////////////////////  주문 끝
+
+
+
+
+
+                    ////////////////////////////////////////////////////////////////  리뷰 시작
+
+
+
+                    ////////////////////////////////////////////////////////////////  리뷰 끝
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -223,9 +252,12 @@ public class LoginInteractor {
          */
         System.out.println("login()진입");
         database = databaseHelper.getWritableDatabase();
+
         database.execSQL("DELETE FROM users");
         database.execSQL("DELETE FROM restaurant");
         database.execSQL("DELETE FROM food");
+        database.execSQL("DELETE FROM review");
+        database.execSQL("DELETE FROM ordernum");
 
         database.close();
 

@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @BindView(R.id.noodle_btn)
     ImageButton noodleBtn;
 
-    @OnClick({R.id.pizza_btn, R.id.chicken_btn, R.id.hansik_btn, R.id.noodle_btn})
+    @OnClick({R.id.pizza_btn, R.id.chicken_btn, R.id.hansik_btn, R.id.noodle_btn, R.id.pig_btn, R.id.japanese_btn})
     public void onClick(View v) {
         // 혹시 다른 버튼의 기능이 추가될 수도 있으므로
         String btnCheck = mainPresenter.mainBtnCheck(v);

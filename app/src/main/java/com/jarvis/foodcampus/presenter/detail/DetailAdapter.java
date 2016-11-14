@@ -90,7 +90,7 @@ public class DetailAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        String childName = arrayChild.get(arrayGroup.get(groupPosition)).get(childPosition).getFood();
+        String childName = arrayChild.get(arrayGroup.get(groupPosition)).get(childPosition).getFoodname();
         String childPrice = String.valueOf(arrayChild.get(arrayGroup.get(groupPosition)).get(childPosition).getPrice());
         String childSize = arrayChild.get(arrayGroup.get(groupPosition)).get(childPosition).getSize();
         View v = convertView;

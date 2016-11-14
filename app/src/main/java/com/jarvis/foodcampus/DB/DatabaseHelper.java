@@ -31,7 +31,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseManage.Restaurant.COLUMN_NAME_OPEN_TIME + " TEXT, " +
             DatabaseManage.Restaurant.COLUMN_NAME_CLOSE_TIME + " TEXT )";
 
-
     private static final String SQL_CREATE_FOOD_TABLE = "CREATE TABLE " +
             DatabaseManage.Food.TABLE_NAME + "(" +
             DatabaseManage.Food._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -42,9 +41,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseManage.Food.COLUMN_NAME_FOOD_PRICE + " TEXT, " +
             DatabaseManage.Food.COLUMN_NAME_FOOD_INFO + " TEXT )";
 
+    private static final String SQL_CREATE_ORDER_TABLE = "CREATE TABLE " +
+            DatabaseManage.Order.TABLE_NAME + "(" +
+            DatabaseManage.Order._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            DatabaseManage.Order.COLUMN_NAME_ORDER_ID + " INTEGER, " +
+            DatabaseManage.Order.COLUMN_NAME_USER_ID + " INTEGER, " +
+            DatabaseManage.Order.COLUMN_NAME_RESTAURANT_ID + " INTEGER )";
 
-    //review
-    //order
+    private static final String SQL_CREATE_REVIEW_TABLE = "CREATE TABLE " +
+            DatabaseManage.Review.TABLE_NAME + "(" +
+            DatabaseManage.Review._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            DatabaseManage.Review.COLUMN_NAME_RESTAURANT_ID + " INTEGER, " +
+            DatabaseManage.Review.COLUMN_NAME_USER_ID + " INTEGER, " +
+            DatabaseManage.Review.COLUMN_NAME_LIKE_YN + " TEXT )";
+
 
 
     public DatabaseHelper(Context context) {
@@ -56,14 +66,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // 그뒤로는 안되요 다시하려면 앱을 지우던지
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("creating table"+DatabaseManage.User.TABLE_NAME);
 
         db.execSQL(SQL_CREATE_USERS_TABLE);
         db.execSQL(SQL_CREATE_RESTAURANT_TABLE);
         db.execSQL(SQL_CREATE_FOOD_TABLE);
+        db.execSQL(SQL_CREATE_ORDER_TABLE);
+        db.execSQL(SQL_CREATE_REVIEW_TABLE);
+
         Log.i("DatabaseHelper Table","테이블생성");
     }
 
+    // 업그레이드는 골치아파서 안합니다 버전 관리하기 힘듬
+    // 어차피 테이블 5개 거의 고정확정이니.. 나중에 추가 기능이 필요하면 릴리즈할때 테이블 추가해서 릴리즈하는걸로
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

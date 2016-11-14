@@ -6,6 +6,7 @@ package com.jarvis.foodcampus.presenter.detail;
 
 public interface DetailPresenter {
     void initData();
-    void whichFood(String food);
+    void setRestaurant(String food);
     void getFoodData();
+    void setCategory(String category);
 }

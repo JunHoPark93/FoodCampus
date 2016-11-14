@@ -42,4 +42,18 @@ public class DatabaseManage {
         static final String COLUMN_NAME_FOOD_PRICE = "food_price";
         static final String COLUMN_NAME_FOOD_INFO = "food_info";
     }
+
+    static class Review implements BaseColumns {
+        static final String TABLE_NAME = "review";
+        static final String COLUMN_NAME_USER_ID = "user_id";
+        static final String COLUMN_NAME_RESTAURANT_ID = "restaurant_id";
+        static final String COLUMN_NAME_LIKE_YN = "like_yn";
+    }
+
+    static class Order implements BaseColumns {
+        static final String TABLE_NAME = "ordernum";
+        static final String COLUMN_NAME_ORDER_ID = "order_id";
+        static final String COLUMN_NAME_USER_ID = "user_id";
+        static final String COLUMN_NAME_RESTAURANT_ID = "restaurant_id";
+    }
 }

@@ -208,8 +208,17 @@ public abstract class BaseActivity extends AppCompatActivity
                 finish();
                 break;
 
-            case R.id.nav_jokbal:
-                //createBackStack(new Intent(this, JokbalActivity.class));
+            case R.id.nav_night:
+                intent = new Intent(this, RestaurantActivity.class);
+                intent.putExtra("restaurant","night");
+                createBackStack(intent);
+                finish();
+                break;
+
+            case R.id.nav_japanese:
+                intent = new Intent(this, RestaurantActivity.class);
+                intent.putExtra("restaurant","japanese");
+                createBackStack(intent);
                 finish();
                 break;
 

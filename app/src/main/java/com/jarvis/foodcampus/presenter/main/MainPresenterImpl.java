@@ -86,12 +86,18 @@ public class MainPresenterImpl implements MainPresenter {
         } else if (v.getId() == R.id.chicken_btn) {
             mainView.showMessage("Chicken Click");
             return "chicken";
-        }else if (v.getId() == R.id.noodle_btn) {
+        } else if (v.getId() == R.id.noodle_btn) {
             mainView.showMessage("Chinese Click");
             return "chinese";
-        }else if (v.getId() == R.id.hansik_btn) {
+        } else if (v.getId() == R.id.hansik_btn) {
             mainView.showMessage("Korean Click");
             return "korean";
+        } else if(v.getId() == R.id.pig_btn) {
+            mainView.showMessage("Night Click");
+            return "night";
+        } else if(v.getId() == R.id.japanese_btn) {
+            mainView.showMessage("Japanese Click");
+            return "japanese";
         } else {
             return "failed"; // 예외처리 어떻게할까?
         }

@@ -1,11 +1,13 @@
 package com.jarvis.foodcampus.view.detail;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -46,6 +48,8 @@ public class DetailActivity extends BaseActivity implements DetailView {
     Button reviewBtn;
     @BindView(R.id.detail_radio_group)
     RadioGroup radioGroup;
+    @BindView(R.id.detailImageView)
+    ImageView detailImageView;
 
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
@@ -66,31 +70,20 @@ public class DetailActivity extends BaseActivity implements DetailView {
          *  /////////////////////////////////////////////////
          */
         String res = getIntent().getStringExtra("restaurantId");
+        String category = getIntent().getStringExtra("categoryId");
         /**
          *  여기까지
          *  /////////////////////////////////////////
          */
 
-
-
         listView = (ExpandableListView) this.findViewById(R.id.detail_expendList);
-
-        //임시로 일케 연결함 intent로 넘겨주세요 ㅇㅋ
-        /**
-        detailName.setText("은비네 두마리 치킨");
-        detailGrade.setText("좋아요 : 10 / 싫어요 : 5");
-        detailOrder.setText("총 주문수 : 8회");
-        detailHour.setText("15:00 ~ 23:00");
-        detailIntro.setText("안녕하세요? \nJarvis 팀이 만든 Application\n [ 푸드캠퍼스 ] 입니다. \n 맛잇는거 많이 시켜드세용");
-
-        detailPhoneBtn.setText("tel:010-5520-5333");
-         */
 
         detailAdapter = new DetailAdapter(this);
         listView.setAdapter(detailAdapter);
 
         detailPresenter = new DetailPresenterImpl(this, getApplicationContext());
-        detailPresenter.whichFood(res);
+        detailPresenter.setRestaurant(res);
+        detailPresenter.setCategory(category);
         detailPresenter.getFoodData();
         detailPresenter.initData();
 
@@ -120,9 +113,10 @@ public class DetailActivity extends BaseActivity implements DetailView {
      *  뷰 (레이아웃) 설정 메소드 설정하고 프레젠터에서 넘겨받고 여기서 단순히 세팅만 해줄거임
      */
 
-    public void setDisplay(String name, String hour, String phone) {
+    public void setDisplay(String name, String hour, String phone, Drawable resIcon) {
         detailName.setText(name);
         detailHour.setText(hour);
-        detailPhoneBtn.setText(phone);
+        detailPhoneBtn.setText("tel:"+phone);
+        detailImageView.setImageDrawable(resIcon);
     }
 }
