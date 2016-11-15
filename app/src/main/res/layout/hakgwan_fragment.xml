@@ -1,0 +1,103 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".view.schoolfood.SchoolFoodActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_mon"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_monfood"
+                    android:textSize="18sp"
+                    android:gravity="left" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_tue"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_tuefood"
+                    android:textSize="18sp"
+                    android:gravity="left" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_wed"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_wedfood"
+                    android:textSize="18sp"
+                    android:gravity="left" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_thu"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_thufood"
+                    android:textSize="18sp"
+                    android:gravity="left" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_fri"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hakgwan_frifood"
+                    android:textSize="18sp"
+                    android:gravity="left" />
+            </LinearLayout>
+        </ScrollView>
+
+
+        <!--
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/schoolfood_listView"
+            android:layout_below="@+id/button"
+            android:background="@color/colorNavy"/>
+            -->
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
