@@ -11,7 +11,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by JunHo on 2016-11-06.
@@ -23,13 +25,11 @@ public class HakGwanPresenterImpl implements HakGwanPresenter{
     private ArrayList<String> foodContentText = new ArrayList<>();
     private ArrayList<String> dateText = new ArrayList<>();
     private HakGwanFragmentView hakGwanFragmentView;
+    private String startDay; // 월요일
+    private String endDay; // 금요일
 
-    // 주 월요일 날짜 , 금요일 날짜 구해야함
-    private String startDay= "2016-11-14";
-    private String endDay = "2016-11-18";
-
-    // 명진당 url
-    private String hakgwanUrl = "http://www.mju.ac.kr/mbs/mjukr/jsp/restaurant/restaurant.jsp?configIdx=36548&firstWeekDay="+startDay+"&lastWeekDay="+endDay+"&id=mjukr_051002020000";
+    // 학관 url
+    private String hakgwanUrl;
 
 
     public HakGwanPresenterImpl(HakGwanFragmentView hakGwanFragmentView , Context context) {
@@ -38,6 +38,17 @@ public class HakGwanPresenterImpl implements HakGwanPresenter{
     }
 
     public void getSchoolFoodData() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, (Calendar.MONDAY - c.get(Calendar.DAY_OF_WEEK)));
+        startDay = formatter.format(c.getTime());
+        c.add(Calendar.DATE, (Calendar.FRIDAY - c.get(Calendar.DAY_OF_WEEK)));
+        endDay = formatter.format(c.getTime());
+
+        // url 설정
+        hakgwanUrl = "http://www.mju.ac.kr/mbs/mjukr/jsp/restaurant/restaurant.jsp?configIdx=36548&firstWeekDay="+startDay+"&lastWeekDay="+endDay+"&id=mjukr_051002020000";
+
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
     }

@@ -11,7 +11,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by JunHo on 2016-11-15.
@@ -24,13 +26,12 @@ public class MyongJinDangPresenterImpl implements MyongJinDangPresenter{
     private ArrayList<String> foodContentText = new ArrayList<>();
     private ArrayList<String> dateText = new ArrayList<>();
     private MyonJinDangFragmentView myonJinDangFragmentView;
+    private String startDay;
+    private String endDay;
 
-    // 주 월요일 날짜 , 금요일 날짜 구해야함
-    private String startDay= "2016-11-14";
-    private String endDay = "2016-11-18";
 
     // 명진당 url
-    private String myongJinDangUrl = "http://www.mju.ac.kr/mbs/mjukr/jsp/restaurant/restaurant.jsp?configIdx=36337&firstWeekDay="+startDay+"&lastWeekDay="+endDay+"&id=mjukr_051002050000";
+    private String myongJinDangUrl;
 
 
     public MyongJinDangPresenterImpl(MyonJinDangFragmentView myonJinDangFragmentView , Context context) {
@@ -39,6 +40,17 @@ public class MyongJinDangPresenterImpl implements MyongJinDangPresenter{
     }
 
     public void getSchoolFoodData() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, (Calendar.MONDAY - c.get(Calendar.DAY_OF_WEEK)));
+        startDay = formatter.format(c.getTime());
+        c.add(Calendar.DATE, (Calendar.FRIDAY - c.get(Calendar.DAY_OF_WEEK)));
+        endDay = formatter.format(c.getTime());
+
+        // url설정
+        myongJinDangUrl = "http://www.mju.ac.kr/mbs/mjukr/jsp/restaurant/restaurant.jsp?configIdx=36337&firstWeekDay="+startDay+"&lastWeekDay="+endDay+"&id=mjukr_051002050000";
+
         MyongJinDangPresenterImpl.JsoupAsyncTask jsoupAsyncTask = new MyongJinDangPresenterImpl.JsoupAsyncTask();
         jsoupAsyncTask.execute();
     }
