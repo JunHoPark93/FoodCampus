@@ -13,6 +13,7 @@ import com.jarvis.foodcampus.DB.RestaurantDataSource;
 import com.jarvis.foodcampus.DB.ReviewDataSource;
 import com.jarvis.foodcampus.DB.UserDataSource;
 import com.jarvis.foodcampus.model.FoodModel;
+import com.jarvis.foodcampus.model.OrderModel;
 import com.jarvis.foodcampus.model.RestaurantModel;
 import com.jarvis.foodcampus.model.UserModel;
 
@@ -50,6 +51,7 @@ public class LoginInteractor {
 
     private RestaurantModel[] restaurantModels; // 서버에서 받아온거 내장에 박기위한 모델
     private FoodModel[] foodModels; // 위와 같음
+    private OrderModel[] orderModels;
 
     public LoginInteractor(Context context) {
 
@@ -140,7 +142,9 @@ public class LoginInteractor {
                     JSONArray restaurants = jObject.getJSONArray("restaurants");
                     JSONArray foods = jObject.getJSONArray("foods");
                     //JSONArray reviews = jObject.getJSONArray("reviews");
-                    //JSONArray order = jObject.getJSONArray("order");
+                    JSONArray order = jObject.getJSONArray("orders");
+
+                    System.out.println("주문제이슨 "+order);
 
                     System.out.println(restaurants);
                     System.out.println("음식데이터 제이슨배열"+foods);
@@ -213,8 +217,18 @@ public class LoginInteractor {
 
                     ////////////////////////////////////////////////////////////////  주문 시작
 
+                    orderModels = new OrderModel[order.length()];
 
-                    // 코드작성 here
+                    for(int i=0; i<order.length(); i++) {
+                        JSONObject orderTemp = order.getJSONObject(i);
+
+                        String orderId = orderTemp.getString("ORDER_ID");
+                        String userId = orderTemp.getString("USER_ID");
+                        String restaurantId = orderTemp.getString("RESTAURANT_ID");
+
+                        orderModels[i] = new OrderModel(Integer.parseInt(orderId), Integer.parseInt(userId), Integer.parseInt(restaurantId));
+                    }
+
 
 
                     ////////////////////////////////////////////////////////////////  주문 끝
@@ -269,6 +283,7 @@ public class LoginInteractor {
 
         addRestaurantData(restaurantModels);
         addFoodData(foodModels);
+        addOrderData(orderModels);
     }
 
     /**
@@ -295,5 +310,14 @@ public class LoginInteractor {
         }
 
         foodDataSource.close();
+    }
+
+    public void addOrderData(OrderModel[] orderModels) {
+        orderDataSource.open();
+
+        for(int i=0; i<orderModels.length; i++) {
+            orderDataSource.addOrder(orderModels[i]);
+        }
+        orderDataSource.close();
     }
 }
