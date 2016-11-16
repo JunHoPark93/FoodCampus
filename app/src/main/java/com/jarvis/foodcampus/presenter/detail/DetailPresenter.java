@@ -9,4 +9,5 @@ public interface DetailPresenter {
     void setRestaurant(String food);
     void getFoodData();
     void setCategory(String category);
+    void sendOrderNum();
 }
