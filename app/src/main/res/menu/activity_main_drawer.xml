@@ -30,9 +30,13 @@
             android:icon="@drawable/flour"
             android:title="중식" />
         <item
-            android:id="@+id/nav_jokbal"
+            android:id="@+id/nav_night"
             android:icon="@drawable/jokbal"
-            android:title="족발" />
+            android:title="야식" />
+        <item
+            android:id="@+id/nav_japanese"
+            android:icon="@drawable/flour"
+            android:title="일식" />
 
 
     </group>
