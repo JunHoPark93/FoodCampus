@@ -3,6 +3,8 @@ package com.jarvis.foodcampus.view.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -28,8 +30,12 @@ public class MainActivity extends BaseActivity implements MainView {
     ImageButton hanksikBtn;
     @BindView(R.id.noodle_btn)
     ImageButton noodleBtn;
+    @BindView(R.id.main_search_btn)
+    Button search_Btn;
+    @BindView(R.id.main_search)
+    EditText searchEdit;
 
-    @OnClick({R.id.pizza_btn, R.id.chicken_btn, R.id.hansik_btn, R.id.noodle_btn, R.id.pig_btn, R.id.japanese_btn})
+    @OnClick({R.id.pizza_btn, R.id.chicken_btn, R.id.hansik_btn, R.id.noodle_btn, R.id.pig_btn, R.id.flour_btn, R.id.main_today_pick_btn})
     public void onClick(View v) {
         // 혹시 다른 버튼의 기능이 추가될 수도 있으므로
         String btnCheck = mainPresenter.mainBtnCheck(v);
@@ -51,6 +57,17 @@ public class MainActivity extends BaseActivity implements MainView {
 
         mainPresenter = new MainPresenterImpl(this, getApplicationContext());
 
+        search_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RestaurantActivity.class);
+                intent.putExtra("restaurant","search");
+                intent.putExtra("searchContent",searchEdit.getText().toString());
+
+                startActivity(intent);
+
+            }
+        });
         //pizzaBtn.setOnClickListener(this);
         //chickenBtn.setOnClickListener(this);
     }

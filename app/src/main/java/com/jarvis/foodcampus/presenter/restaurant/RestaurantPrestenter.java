@@ -5,6 +5,6 @@ package com.jarvis.foodcampus.presenter.restaurant;
  */
 
 public interface RestaurantPrestenter {
-    void initData();
+    void initData(String searchContent);
     void whichRestaurant(String restaurant);
 }

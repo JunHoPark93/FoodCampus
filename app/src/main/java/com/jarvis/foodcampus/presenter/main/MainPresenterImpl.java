@@ -95,9 +95,12 @@ public class MainPresenterImpl implements MainPresenter {
         } else if(v.getId() == R.id.pig_btn) {
             mainView.showMessage("Night Click");
             return "night";
-        } else if(v.getId() == R.id.japanese_btn) {
+        } else if(v.getId() == R.id.flour_btn) {
             mainView.showMessage("Japanese Click");
             return "japanese";
+        }else if(v.getId() == R.id.main_today_pick_btn) {
+            mainView.showMessage("Random Click");
+            return "random";
         } else {
             return "failed"; // 예외처리 어떻게할까?
         }
