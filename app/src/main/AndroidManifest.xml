@@ -50,7 +50,19 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
 
         </activity>
-        <activity android:name=".view.detail.DetailActivity"></activity>
+
+        <!-- Detail액티비티-->
+        <activity android:name=".view.detail.DetailActivity"
+            android:parentActivityName=".view.restaurant.RestaurantActivity">
+
+        </activity>
+
+        <!--SchoolFood액티비티-->
+        <activity android:name=".view.schoolfood.SchoolFoodActivity"
+            android:parentActivityName=".view.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
 
 
         <!--카카오 API-->
