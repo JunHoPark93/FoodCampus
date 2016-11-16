@@ -16,8 +16,6 @@ import com.jarvis.foodcampus.presenter.restaurant.RestaurantPrestenter;
 import com.jarvis.foodcampus.view.base.BaseActivity;
 import com.jarvis.foodcampus.view.detail.DetailActivity;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by JunHo on 2016-10-22.
  */
@@ -29,6 +27,7 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
     private RestaurantPrestenter restaurantPrestenter;
     private String res;
     private String s_content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

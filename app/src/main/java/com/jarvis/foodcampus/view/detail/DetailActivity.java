@@ -56,6 +56,8 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
     @OnClick(R.id.detail_phone_btn)
     public void onClick(View v) {
+        // 서버 요청해야됨
+        detailPresenter.sendOrderNum();
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(detailPhoneBtn.getText().toString().toLowerCase()));
         startActivity(intent);
     }
@@ -94,12 +96,6 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 reviewBtn.setVisibility(View.INVISIBLE);
             }
         });
-
-        //     setItem();
-
-        //     listView.setAdapter(new DetailAdapter(this, arrayGroup, arrayChild));
-
-
     }
 
 
@@ -118,5 +114,9 @@ public class DetailActivity extends BaseActivity implements DetailView {
         detailHour.setText(hour);
         detailPhoneBtn.setText("tel:"+phone);
         detailImageView.setImageDrawable(resIcon);
+    }
+
+    public void setOrder(int num) {
+        detailOrder.setText("전체 " + num + " 회 주문함");
     }
 }

@@ -55,15 +55,19 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
             case "japanese":
                 whichRestaurant = 6;
                 break;
+
             case "search":
                 whichRestaurant = 7;
                 break;
+
             case "random":
                 whichRestaurant = ((int)(Math.random()*6))+1;
                 System.out.println("랜덤랜덤픽 : " + whichRestaurant);
                 break;
+
             default:
                 break;
+
         }
     }
 
@@ -75,13 +79,17 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
 
         // 카테코리별로 데이터를 가져온다 (카테고리가 치킨이면 치킨만, 피자면 피자만...)
         Log.i("레스토랑initData",String.valueOf(whichRestaurant));
+        //String sql = "SELECT * FROM " + "restaurant " + "where category_id = " + "'"+whichRestaurant+"'";
+        //Cursor result = database.rawQuery(sql, null);
+
         String sql;
         if(whichRestaurant==7){
             System.out.println("Search : "+searchContent);
-             sql= "SELECT * FROM " + "restaurant " + "where restaurant_name like " + "'%" + searchContent + "%'";
+            sql= "SELECT * FROM " + "restaurant " + "where restaurant_name like " + "'%" + searchContent + "%'";
         }else {
-             sql = "SELECT * FROM " + "restaurant " + "where category_id = " + "'" + whichRestaurant + "'";
+            sql = "SELECT * FROM " + "restaurant " + "where category_id = " + "'" + whichRestaurant + "'";
         }
+
         Cursor result = database.rawQuery(sql, null);
 
         restaurantModels = new RestaurantModel[result.getCount()];
