@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jarvis.foodcampus.R;
@@ -14,6 +15,8 @@ import com.jarvis.foodcampus.presenter.restaurant.RestaurantPresenterImpl;
 import com.jarvis.foodcampus.presenter.restaurant.RestaurantPrestenter;
 import com.jarvis.foodcampus.view.base.BaseActivity;
 import com.jarvis.foodcampus.view.detail.DetailActivity;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by JunHo on 2016-10-22.
@@ -25,7 +28,7 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
     private RestaurantAdpater restaurantAdpater;
     private RestaurantPrestenter restaurantPrestenter;
     private String res;
-
+    private String s_content;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,14 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
          */
         Intent intentGet = getIntent();
         res = intentGet.getStringExtra("restaurant");
+        TextView resBarTv = (TextView) findViewById( R.id.restautant_bar_tv);
+        if(res.toString().equals("search")){
+            s_content = intentGet.getStringExtra("searchContent");
+            resBarTv.setText("Search : "+s_content);
+
+        }else{
+            resBarTv.setText(res);
+        }
         /**
          *  여기까지
          *  /////////////////////////////////////////
@@ -50,7 +61,7 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
         restaurantPrestenter = new RestaurantPresenterImpl(this, getApplicationContext());
         restaurantPrestenter.whichRestaurant(res);
 
-        restaurantPrestenter.initData();
+        restaurantPrestenter.initData(s_content);
 
         System.out.println(restaurantAdpater.getCount()+"레스토랑뷰사이즈");
         listView.setOnItemClickListener(this);
