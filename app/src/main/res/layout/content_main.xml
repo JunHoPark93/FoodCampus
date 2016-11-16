@@ -1,131 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
-    android:background="#FFFFFF">
-
+    android:layout_marginTop="?attr/actionBarSize">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
 
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:background="#FFFFFF">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_btn_layout"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageButton
+                android:id="@+id/pizza_btn"
+                android:src="@drawable/main_pizza"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                android:layout_alignBottom="@+id/chicken_btn"
+                android:layout_toRightOf="@+id/chicken_btn"
+                android:layout_toEndOf="@+id/chicken_btn"
+                android:layout_marginBottom="3dp"
+                android:layout_height="153dp"
+                android:layout_width="165dp" />
+
+            <ImageButton
+                android:id="@+id/hansik_btn"
+                android:src="@drawable/rice_main"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                android:layout_alignTop="@+id/noodle_btn"
+                android:layout_toLeftOf="@+id/pizza_btn"
+                android:layout_toStartOf="@+id/pizza_btn"
+                app:srcCompat="@drawable/main_korea"
+                android:layout_height="140dp"
+                android:layout_width="165dp" />
+
+            <ImageButton
+                android:id="@+id/pig_btn"
+                android:src="@drawable/main_night"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                android:layout_below="@+id/hansik_btn"
+                android:layout_width="165dp"
+                android:layout_height="140dp" />
+
+            <ImageButton
+                android:id="@+id/japanese_btn"
+                android:src="@drawable/main_dosirak"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                android:layout_alignBottom="@+id/pig_btn"
+                android:layout_alignRight="@+id/noodle_btn"
+                android:layout_alignEnd="@+id/noodle_btn"
+                android:layout_width="165dp"
+                android:layout_below="@+id/hansik_btn"
+                android:layout_height="140dp" />
+
+            <ImageButton
+                android:id="@+id/noodle_btn"
+                android:src="@drawable/main_chinese"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                android:layout_below="@+id/pizza_btn"
+                android:layout_alignLeft="@+id/pizza_btn"
+                android:layout_alignStart="@+id/pizza_btn"
+                android:layout_width="165dp"
+                android:layout_height="140dp" />
+
+            <ImageButton
+                android:id="@+id/chicken_btn"
+                android:src="@drawable/chicken_main"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                app:srcCompat="@drawable/main_chicken"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="165dp"
+                android:layout_height="140dp" />
+
+        </RelativeLayout>
 
         <ImageButton
-        android:id="@+id/pizza_btn"
-        android:src="@drawable/main_pizza"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:layout_alignBottom="@+id/chicken_btn"
-        android:layout_toRightOf="@+id/chicken_btn"
-        android:layout_toEndOf="@+id/chicken_btn"
-            android:layout_marginBottom="3dp"
-            android:layout_height="153dp"
-            android:layout_width="165dp" />
-
-    <ImageButton
-        android:id="@+id/hansik_btn"
-        android:src="@drawable/rice_main"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:layout_alignTop="@+id/noodle_btn"
-        android:layout_toLeftOf="@+id/pizza_btn"
-        android:layout_toStartOf="@+id/pizza_btn"
-        app:srcCompat="@drawable/main_korea"
-        android:layout_height="140dp"
-        android:layout_width="165dp" />
-
-    <ImageButton
-        android:id="@+id/pig_btn"
-        android:src="@drawable/main_night"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:layout_below="@+id/hansik_btn"
-        android:layout_width="165dp"
-        android:layout_height="140dp" />
-
-    <ImageButton
-        android:id="@+id/flour_btn"
-        android:src="@drawable/main_dosirak"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:layout_alignBottom="@+id/pig_btn"
-        android:layout_alignRight="@+id/noodle_btn"
-        android:layout_alignEnd="@+id/noodle_btn"
-        android:layout_width="165dp"
-        android:layout_below="@+id/hansik_btn"
-        android:layout_height="140dp" />
-
-    <ImageButton
-        android:id="@+id/noodle_btn"
-        android:src="@drawable/main_chinese"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:layout_below="@+id/pizza_btn"
-        android:layout_alignLeft="@+id/pizza_btn"
-        android:layout_alignStart="@+id/pizza_btn"
-        android:layout_width="165dp"
-        android:layout_height="140dp" />
-
-        <ImageButton
-            android:id="@+id/chicken_btn"
-            android:src="@drawable/chicken_main"
-            android:adjustViewBounds="true"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/main_today_pick_btn"
             android:scaleType="fitXY"
             android:background="#00ffffff"
-            app:srcCompat="@drawable/main_chicken"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_width="165dp"
-            android:layout_height="140dp" />
+            android:id="@+id/main_today_pick_btn"
+            android:layout_width="300dp"
+            android:layout_above="@+id/main_btn_layout"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_search"
+            android:textColor="@color/com_kakao_brown"
+            android:hint="Search"
+            android:textColorHint="@color/colorAccent"
+            android:layout_alignTop="@+id/main_search_btn"
+            android:layout_alignLeft="@+id/main_btn_layout"
+            android:layout_alignStart="@+id/main_btn_layout"
+            android:layout_alignRight="@+id/main_search_btn"
+            android:layout_alignEnd="@+id/main_search_btn" />
+
+        <Button
+            android:text="Go"
+            android:padding="2dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_search_btn"
+            android:layout_below="@+id/main_btn_layout"
+            android:textColor="#FFFFFF"
+            android:layout_alignRight="@+id/main_btn_layout"
+            android:layout_alignEnd="@+id/main_btn_layout"
+            android:layout_marginTop="15dp"
+            android:layout_width="50dp" />
 
     </RelativeLayout>
-
-    <ImageButton
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/main_today_pick_btn"
-        android:scaleType="fitXY"
-        android:background="#00ffffff"
-        android:id="@+id/main_today_pick_btn"
-        android:layout_width="300dp"
-        android:layout_above="@+id/main_btn_layout"
-        android:layout_centerHorizontal="true" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_search"
-        android:textColor="@color/com_kakao_brown"
-        android:hint="Search"
-        android:textColorHint="@color/colorAccent"
-        android:layout_alignTop="@+id/main_search_btn"
-        android:layout_alignLeft="@+id/main_btn_layout"
-        android:layout_alignStart="@+id/main_btn_layout"
-        android:layout_alignRight="@+id/main_search_btn"
-        android:layout_alignEnd="@+id/main_search_btn" />
-
-    <Button
-        android:text="Go"
-        android:padding="2dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_search_btn"
-        android:layout_below="@+id/main_btn_layout"
-        android:textColor="#FFFFFF"
-        android:layout_alignRight="@+id/main_btn_layout"
-        android:layout_alignEnd="@+id/main_btn_layout"
-        android:layout_marginTop="15dp"
-        android:layout_width="50dp" />
-
-
-
-</RelativeLayout>
+</LinearLayout>
