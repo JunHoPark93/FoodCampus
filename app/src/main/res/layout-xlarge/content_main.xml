@@ -78,7 +78,7 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:padding="10dp"
-            android:id="@+id/flour_btn"
+            android:id="@+id/japanese_btn"
             android:src="@drawable/flour_main"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
