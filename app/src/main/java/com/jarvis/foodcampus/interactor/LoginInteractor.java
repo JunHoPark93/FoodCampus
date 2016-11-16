@@ -292,6 +292,7 @@ public class LoginInteractor {
      */
     public void addRestaurantData(RestaurantModel[] restaurantModels) {
 
+
         restaurantDataSource.open();
 
         for(int i=0; i<restaurantModels.length; i++) {
