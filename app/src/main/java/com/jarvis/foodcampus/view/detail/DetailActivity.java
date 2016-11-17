@@ -6,8 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -47,9 +50,14 @@ public class DetailActivity extends BaseActivity implements DetailView {
     @BindView(R.id.detail_review_btn)
     Button reviewBtn;
     @BindView(R.id.detail_radio_group)
-    RadioGroup radioGroup;
+    LinearLayout checkGroup;
     @BindView(R.id.detailImageView)
     ImageView detailImageView;
+    @BindView(R.id.detail_like_btn)
+    CheckBox likeBtn;
+    @BindView(R.id.detail_hate_btn)
+    CheckBox hateBtn;
+
 
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
@@ -89,14 +97,27 @@ public class DetailActivity extends BaseActivity implements DetailView {
         detailPresenter.getFoodData();
         detailPresenter.initData();
 
+        likeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hateBtn.setChecked(false);
+            }
+        });
+        hateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeBtn.setChecked(false);
+            }
+        });
+
         reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                radioGroup.setVisibility(View.VISIBLE);
                 reviewBtn.setVisibility(View.INVISIBLE);
+                checkGroup.setVisibility(View.VISIBLE);
+                //여기다 리뷰 인서트를하세여
             }
-        });
-    }
+        });    }
 
 
 

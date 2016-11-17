@@ -134,8 +134,7 @@
                 android:scaleType="centerCrop"
                 />
 
-            <RadioGroup
-                android:checkedButton="@+id/detail_like_btn"
+            <LinearLayout
                 android:id="@+id/detail_radio_group"
                 android:layout_height="30dp"
                 android:layout_width="150dp"
@@ -146,48 +145,36 @@
                 android:visibility="invisible"
                 >
 
-                <RadioButton
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:id="@+id/detail_like_btn"
-                    android:background="@drawable/detail_switch"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.98"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="Like"
-                    android:textColor="@color/com_kakao_account_button_background" />
 
-                <RadioButton
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:id="@+id/detail_default_btn"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:layout_margin="1dp"
+                    android:id="@+id/detail_like_btn"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/detail_switch"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="Hate"
-                    android:textColor="@color/com_kakao_account_button_background" />
+                    android:textAlignment="center"
+                    android:text="Like"
+                    android:textColor="@color/com_kakao_account_button_background"
+                    android:layout_width="wrap_content"
+                    />
 
-                <RadioButton
+                <CheckBox
                     android:layout_marginRight="1dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginBottom="1dp"
                     android:id="@+id/detail_hate_btn"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textAlignment="center"
                     android:background="@drawable/detail_switch"
                     android:button="@null"
                     android:gravity="center"
                     android:text="Hate"
                     android:textColor="@color/com_kakao_account_button_background" />
-            </RadioGroup>
+            </LinearLayout>
 
             <TextView
                 android:text="Please review"
