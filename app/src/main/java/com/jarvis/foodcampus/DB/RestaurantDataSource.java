@@ -24,8 +24,6 @@ public class RestaurantDataSource {
     public void open() throws SQLException {
         database = databaseHelper.getWritableDatabase();
         Log.i("Restaurant Open",databaseHelper.toString());
-
-
     }
 
     public void close() {

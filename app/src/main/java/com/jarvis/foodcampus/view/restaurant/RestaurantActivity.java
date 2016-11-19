@@ -83,6 +83,6 @@ public class RestaurantActivity extends BaseActivity implements RestaurantView, 
         intent.putExtra("restaurantId",String.valueOf(restaurantModel.getRestaurantId())); // 넘어갈때 레스토랑id 같이 넘김
         intent.putExtra("categoryId",res); // 디테일액티비티에서 그림아이콘 설정하기 위해서 넘김
         startActivity(intent);
-        //finish(); //피니시를 해야될까
+        //finish(); //피니시를 해야될까 -> 아니하지마
     }
 }

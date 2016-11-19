@@ -23,15 +23,6 @@ public class RestaurantModel {
     private String openTime;
     private String closeTime;
 
-    //public Drawable getIconDrawable() {
-
-//    return iconDrawable;
-//    }
-
-//    public void setIconDrawable(Drawable iconDrawable) {
-//        this.iconDrawable = iconDrawable;
-//    }
-
     public RestaurantModel() {
 
     }
