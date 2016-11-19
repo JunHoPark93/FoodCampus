@@ -85,9 +85,22 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
         String sql;
         if(whichRestaurant==7){
             System.out.println("Search : "+searchContent);
-            sql= "SELECT * FROM " + "restaurant " + "where restaurant_name like " + "'%" + searchContent + "%'";
+
+            sql = "SELECT * " +
+                    "FROM restaurant r, food f " +
+                    "WHERE restaurant_name like '%" + searchContent + "%' " +
+                    "OR (r.restaurant_id = f.restaurant_id " +
+                    "AND (f.food_name LIKE '%" + searchContent + "%' " +
+                    "OR f.food_group LIKE '%" + searchContent + "%')) " +
+                    "GROUP BY  r.restaurant_id " +
+                    "ORDER BY r.restaurant_name";
+//            sql = "SELECT * FROM restaurant r JOIN (SELECT RESTAURANT_ID FROM food " +
+//                    "WHERE FOOD_NAME LIKE " + "'%" + searchContent + "%'" +
+//                    "OR FOOD_GROUP LIKE " + "'%" + searchContent + "%' GROUP BY restaurant_id) f ON f.RESTAURANT_ID = r.RESTAURANT_ID";
+//            sql= "SELECT * FROM " + "restaurant " + "where restaurant_name like " + "'%" + searchContent + "%'";
         }else {
-            sql = "SELECT * FROM " + "restaurant " + "where category_id = " + "'" + whichRestaurant + "'";
+            sql = "SELECT * FROM " + "restaurant " + "where category_id = " + "'" + whichRestaurant + "' " +
+                    "ORDER BY restaurant_name";
         }
 
         Cursor result = database.rawQuery(sql, null);
