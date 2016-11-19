@@ -337,18 +337,12 @@ public class DetailPresenterImpl implements DetailPresenter {
         String like_yn = null;
 
         switch (whichBtn) {
-
-            // 중립
             case 1:
 
                 break;
-
-            // 좋아요
             case 2:
                 like_yn = "Y";
                 break;
-
-            // 싫어요
             case 3:
                 like_yn = "N";
                 break;
@@ -406,7 +400,6 @@ public class DetailPresenterImpl implements DetailPresenter {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                System.out.println("좋아요성공");
             }
         }
 
