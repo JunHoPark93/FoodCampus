@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jarvis.foodcampus.R;
 import com.jarvis.foodcampus.model.DetailModel;
@@ -50,9 +53,19 @@ public class DetailActivity extends BaseActivity implements DetailView {
     RadioGroup radioGroup;
     @BindView(R.id.detailImageView)
     ImageView detailImageView;
+    @BindView(R.id.detail_progressbar)
+    ProgressBar detailProgressbar;
+    @BindView(R.id.detail_neutral_btn)
+    RadioButton detailNeutralBtn;
+    @BindView(R.id.detail_like_btn)
+    RadioButton detailLikeBtn;
+    @BindView(R.id.detail_hate_btn)
+    RadioButton detailHateBtn;
+
 
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
+    private int whichBtn;
 
     @OnClick(R.id.detail_phone_btn)
     public void onClick(View v) {
@@ -61,6 +74,17 @@ public class DetailActivity extends BaseActivity implements DetailView {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(detailPhoneBtn.getText().toString().toLowerCase()));
         startActivity(intent);
     }
+
+//    @OnClick({R.id.detail_hate_btn, R.id.detail_like_btn, R.id.detail_hate_btn})
+//    public void btnClick(View v) {
+//        if(detailHateBtn.isChecked()) {
+//            whichBtn = 3;
+//        }
+//        else if (detailLikeBtn.isChecked()) {
+//            whichBtn = 2;
+//        }
+//    }
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +112,8 @@ public class DetailActivity extends BaseActivity implements DetailView {
         detailPresenter.setCategory(category);
         detailPresenter.getFoodData();
         detailPresenter.initData();
+        detailPresenter.setRadioButton();
+        detailPresenter.setReviewData();
 
         reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,9 +122,29 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 reviewBtn.setVisibility(View.INVISIBLE);
             }
         });
+
+        detailNeutralBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whichBtn = 1;
+            }
+        });
+
+
+        detailHateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whichBtn = 3;
+            }
+        });
+
+        detailLikeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                whichBtn = 2;
+            }
+        });
     }
-
-
 
     @Override
     public void add(ArrayList<String> arrayGroup, HashMap<String, ArrayList<DetailModel>> arrayChild) {
@@ -106,17 +152,36 @@ public class DetailActivity extends BaseActivity implements DetailView {
     }
 
     /**
-     *  뷰 (레이아웃) 설정 메소드 설정하고 프레젠터에서 넘겨받고 여기서 단순히 세팅만 해줄거임
+     * 뷰 (레이아웃) 설정 메소드 설정하고 프레젠터에서 넘겨받고 여기서 단순히 세팅만 해줄거임
      */
 
     public void setDisplay(String name, String hour, String phone, Drawable resIcon) {
         detailName.setText(name);
         detailHour.setText(hour);
-        detailPhoneBtn.setText("tel:"+phone);
+        detailPhoneBtn.setText("tel:" + phone);
         detailImageView.setImageDrawable(resIcon);
     }
 
     public void setOrder(int num) {
         detailOrder.setText("전체 " + num + " 회 주문함");
+    }
+
+    @Override
+    public void setDefaultRadioButton() {
+        detailNeutralBtn.setChecked(true);
+    }
+
+    @Override
+    public void setReview(int Y, int N) {
+        detailProgressbar.setMax(Y + N);
+        detailProgressbar.setProgress(N);
+    }
+
+    @Override
+    public void onBackPressed() {
+        detailPresenter.sendReview(whichBtn);
+        System.out.println("어떤버튼"+whichBtn);
+        Toast.makeText(this, "백프레스", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

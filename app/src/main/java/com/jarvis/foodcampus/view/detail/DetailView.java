@@ -17,5 +17,5 @@ public interface DetailView {
     void setDisplay(String name, String hour, String phone, Drawable resIcon);
     void setOrder(int num);
     void setDefaultRadioButton();
-    void setReview(int Y,int N);
+    void setReview(int y, int n);
 }
