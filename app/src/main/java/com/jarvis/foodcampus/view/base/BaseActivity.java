@@ -23,6 +23,7 @@ import com.jarvis.foodcampus.view.login.LoginActivity;
 import com.jarvis.foodcampus.view.main.MainActivity;
 import com.jarvis.foodcampus.view.restaurant.RestaurantActivity;
 import com.jarvis.foodcampus.view.schoolfood.SchoolFoodActivity;
+import com.jarvis.foodcampus.view.settings.SettingsActivity;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
@@ -218,6 +219,12 @@ public abstract class BaseActivity extends AppCompatActivity
             case R.id.nav_japanese:
                 intent = new Intent(this, RestaurantActivity.class);
                 intent.putExtra("restaurant","japanese");
+                createBackStack(intent);
+                finish();
+                break;
+
+            case R.id.nav_settings:
+                intent = new Intent(this, SettingsActivity.class);
                 createBackStack(intent);
                 finish();
                 break;

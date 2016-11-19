@@ -52,7 +52,8 @@
         </activity>
 
         <!-- Detail액티비티-->
-        <activity android:name=".view.detail.DetailActivity"
+        <activity
+            android:name=".view.detail.DetailActivity"
             android:parentActivityName=".view.restaurant.RestaurantActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -60,12 +61,28 @@
         </activity>
 
         <!--SchoolFood액티비티-->
-        <activity android:name=".view.schoolfood.SchoolFoodActivity"
+        <activity
+            android:name=".view.schoolfood.SchoolFoodActivity"
             android:parentActivityName=".view.main.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+        <!--SettingsActivity-->
+        <activity
+            android:name=".view.settings.SettingsActivity"
+            android:parentActivityName=".view.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <!--Receiver-->
+        <receiver android:name=".util.receiver.AlarmReceiver"></receiver>
+        <receiver
+            android:name=".util.receiver.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <!--카카오 API-->
         <meta-data
