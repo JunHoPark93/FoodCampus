@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:key="switch_notification"
+        android:summary="학식 메뉴를 푸시알림으로 받습니다."
+        android:switchTextOff="OFF"
+        android:switchTextOn="ON"
+        android:title="학식알림 설정" />
+
+    <com.jarvis.foodcampus.util.TimePreference
+        android:defaultValue="11:50"
+        android:dependency="switch_notification"
+        android:key="time_notification"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="알림시간 설정" />
+</PreferenceScreen>
