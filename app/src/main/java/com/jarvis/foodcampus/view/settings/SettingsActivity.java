@@ -112,7 +112,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         PendingIntent pender = PendingIntent.getBroadcast(SettingsActivity.this, 0, intent, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), hour, minute, 0);
+
+        if (calendar.getTimeInMillis() < System.currentTimeMillis())
+            calendar.add(Calendar.DATE, 1); // 과거시간 설정되면 내일로 결정
         alarm.setRepeating(RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pender);
+        System.out.println("@@!!"+calendar.getTime());
         System.out.println("##################  alarm Setting coompleted#####################");
     }
 }
