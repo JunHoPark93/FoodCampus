@@ -15,6 +15,7 @@ import com.jarvis.foodcampus.DB.UserDataSource;
 import com.jarvis.foodcampus.model.FoodModel;
 import com.jarvis.foodcampus.model.OrderModel;
 import com.jarvis.foodcampus.model.RestaurantModel;
+import com.jarvis.foodcampus.model.ReviewModel;
 import com.jarvis.foodcampus.model.UserModel;
 
 import org.json.JSONArray;
@@ -52,6 +53,7 @@ public class LoginInteractor {
     private RestaurantModel[] restaurantModels; // 서버에서 받아온거 내장에 박기위한 모델
     private FoodModel[] foodModels; // 위와 같음
     private OrderModel[] orderModels;
+    private ReviewModel[] reviewModels;
 
     public LoginInteractor(Context context) {
 
@@ -141,14 +143,14 @@ public class LoginInteractor {
                     JSONArray results = jObject.getJSONArray("result");
                     JSONArray restaurants = jObject.getJSONArray("restaurants");
                     JSONArray foods = jObject.getJSONArray("foods");
-                    //JSONArray reviews = jObject.getJSONArray("reviews");
+                    JSONArray reviews = jObject.getJSONArray("reviews");
                     JSONArray order = jObject.getJSONArray("orders");
 
                     System.out.println("주문제이슨 "+order);
+                    System.out.println("리뷰제이슨" +reviews);
 
                     System.out.println(restaurants);
                     System.out.println("음식데이터 제이슨배열"+foods);
-                    //System.out.println(reviews);
 
                     JSONObject temp = results.getJSONObject(0);
                     System.out.println("============================================");
@@ -239,8 +241,17 @@ public class LoginInteractor {
 
                     ////////////////////////////////////////////////////////////////  리뷰 시작
 
+                    reviewModels = new ReviewModel[reviews.length()];
 
+                    for(int i=0; i<reviews.length(); i++) {
+                        JSONObject reviewTemp = reviews.getJSONObject(i);
 
+                        String userID = reviewTemp.getString("USER_ID");
+                        String likeYN = reviewTemp.getString("LIKE_YN");
+                        String restaurantId = reviewTemp.getString("RESTAURANT_ID");
+
+                        reviewModels[i] = new ReviewModel(Integer.parseInt(userID), Integer.parseInt(restaurantId), likeYN);
+                    }
                     ////////////////////////////////////////////////////////////////  리뷰 끝
 
 
@@ -284,6 +295,7 @@ public class LoginInteractor {
         addRestaurantData(restaurantModels);
         addFoodData(foodModels);
         addOrderData(orderModels);
+        addReviewData(reviewModels);
     }
 
     /**
@@ -320,5 +332,14 @@ public class LoginInteractor {
             orderDataSource.addOrder(orderModels[i]);
         }
         orderDataSource.close();
+    }
+
+    public void addReviewData(ReviewModel[] reviewModels) {
+        reviewDataSource.open();
+
+        for(int i=0; i<reviewModels.length; i++) {
+            reviewDataSource.addReview(reviewModels[i]);
+        }
+        reviewDataSource.close();
     }
 }

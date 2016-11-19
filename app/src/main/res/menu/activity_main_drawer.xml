@@ -12,7 +12,7 @@
         <item
             android:id="@+id/nav_dorm"
             android:icon="@drawable/dorm"
-            android:title="기숙사" />
+            android:title="학식" />
         <item
             android:id="@+id/nav_pizza"
             android:icon="@drawable/pizza"

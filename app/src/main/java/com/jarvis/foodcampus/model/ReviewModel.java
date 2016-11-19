@@ -7,10 +7,9 @@ package com.jarvis.foodcampus.model;
 public class ReviewModel {
     private int userId;
     private int restaurantId;
-    private int likeYN;
+    private String likeYN;
 
-
-    public ReviewModel(int userId, int restaurantId, int likeYN) {
+    public ReviewModel(int userId, int restaurantId, String likeYN) {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.likeYN = likeYN;
@@ -32,11 +31,11 @@ public class ReviewModel {
         this.restaurantId = restaurantId;
     }
 
-    public int getLikeYN() {
+    public String getLikeYN() {
         return likeYN;
     }
 
-    public void setLikeYN(int likeYN) {
+    public void setLikeYN(String likeYN) {
         this.likeYN = likeYN;
     }
 }

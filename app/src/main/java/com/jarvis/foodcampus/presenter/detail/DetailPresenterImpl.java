@@ -52,7 +52,7 @@ public class DetailPresenterImpl implements DetailPresenter {
         this.context = context;
 
         databaseHelper = new DatabaseHelper(context);
-        database = databaseHelper.getReadableDatabase();
+        database = databaseHelper.getReadableDatabase(); // 첨에 열어서 다음함수에서는 안열어도됨
     }
 
     public String getRestaurant() {
@@ -227,6 +227,34 @@ public class DetailPresenterImpl implements DetailPresenter {
     }
 
     @Override
+    public void setReviewData() {
+        database = databaseHelper.getReadableDatabase(); // 처음에 오픈하고
+
+        String sqlReview = "SELECT Like_YN, COUNT(Like_YN) FROM review " +
+                           "WHERE "+"restaurant_id = "+ "'" + restaurant + "' " +
+                           "group by Like_YN order by Like_YN";
+
+        Cursor resultReview = database.rawQuery(sqlReview, null);
+        System.out.println("리뷰갯수:"+resultReview.getCount());
+        if(resultReview.getCount() >= 2) {
+            if(resultReview.moveToFirst()) {
+                int Y = Integer.parseInt(resultReview.getString(1));
+                System.out.println("리뷰 N : " + resultReview.getString(0) + " / " + resultReview.getString(1));
+
+                resultReview.moveToNext();
+                int N = Integer.parseInt(resultReview.getString(1));
+                System.out.println("리뷰 Y : " + resultReview.getString(0) + " / " + resultReview.getString(1));
+
+                detailView.setReview(Y,N);
+            }
+        }
+
+
+        resultReview.close();
+        database.close();
+    }
+
+    @Override
     public void sendOrderNum() {
 
         sharedPreferences = context.getSharedPreferences("login", MODE_PRIVATE);
@@ -291,6 +319,102 @@ public class DetailPresenterImpl implements DetailPresenter {
         try {
             sendOrderNumber = new SendOrderNumber("http://117.17.158.237:3389/index.php/mOrder");
             sendOrderNumber.execute();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setRadioButton() {
+        detailView.setDefaultRadioButton();
+    }
+
+    @Override
+    public void sendReview(int whichBtn) {
+        sharedPreferences = context.getSharedPreferences("login", MODE_PRIVATE);
+        final String api_id = sharedPreferences.getString("serial_number",null);
+
+        String like_yn = null;
+
+        switch (whichBtn) {
+
+            // 중립
+            case 1:
+
+                break;
+
+            // 좋아요
+            case 2:
+                like_yn = "Y";
+                break;
+
+            // 싫어요
+            case 3:
+                like_yn = "N";
+                break;
+            default:
+                break;
+
+        }
+
+        class SendReview extends AsyncTask<String, Void, String> {
+
+            private URL url;
+
+            public SendReview(String url) throws MalformedURLException {
+                this.url=new URL(url);
+            }
+
+            private String readStream(InputStream in) throws IOException {
+                StringBuilder jsonHtml = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                String line = null;
+
+                while((line = reader.readLine()) != null)
+                    jsonHtml.append(line);
+
+                reader.close();
+                return jsonHtml.toString();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+
+                    String postData = "api_id="+api_id+"&like_yn="+params[0]+"&restaurant_id="+params[1];
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    conn.setRequestMethod("POST");
+                    conn.setConnectTimeout(10000);
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    OutputStream outputStream = conn.getOutputStream();
+                    outputStream.write(postData.getBytes("UTF-8"));
+                    outputStream.flush();
+                    outputStream.close();
+                    String result = readStream(conn.getInputStream());
+                    conn.disconnect();
+
+                    return result;
+                }
+                catch (Exception e) {
+                    Log.i("PHPRequest", "request was failed.");
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                System.out.println("좋아요성공");
+            }
+        }
+
+        SendReview sendReview = null;
+
+        try {
+            sendReview = new SendReview("http://117.17.158.237:3389/index.php/mReview");
+            sendReview.execute(like_yn, restaurant);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

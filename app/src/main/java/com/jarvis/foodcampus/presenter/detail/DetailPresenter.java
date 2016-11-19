@@ -10,4 +10,7 @@ public interface DetailPresenter {
     void getFoodData();
     void setCategory(String category);
     void sendOrderNum();
+    void setRadioButton();
+    void sendReview(int whichBtn);
+    void setReviewData();
 }
