@@ -179,7 +179,9 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
     @Override
     public void onBackPressed() {
-        detailPresenter.sendReview(whichBtn);
+        if(whichBtn == 2 || whichBtn == 3) {
+            detailPresenter.sendReview(whichBtn);
+        }
         System.out.println("어떤버튼"+whichBtn);
         Toast.makeText(this, "백프레스", Toast.LENGTH_SHORT).show();
         finish();
