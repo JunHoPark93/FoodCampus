@@ -76,24 +76,28 @@ public class DetailPresenterImpl implements DetailPresenter {
         foodModels = new FoodModel[result.getCount()];
         System.out.println("푸드 디비길이"+result.getCount());
 
+        try {
+            if(result.moveToFirst()) {
+                for(int i=0; i<result.getCount(); i++) {
+                    int foodId = result.getInt(1);
+                    int restaurantId = result.getInt(2);
+                    String foodName = result.getString(3);
+                    String foodPrice = result.getString(4);
+                    String foodGroup = result.getString(5);
+                    String foodInfo = result.getString(6);
+                    System.out.println("foodId"+foodId+"resId"+restaurantId+"foodName"+foodName+"foodGroup"+foodGroup
+                            +"가격:"+foodPrice+" 인푀"+foodInfo);
+                    foodModels[i] = new FoodModel(foodId, restaurantId, foodName, foodPrice, foodGroup, foodInfo);
 
-        if(result.moveToFirst()) {
-            for(int i=0; i<result.getCount(); i++) {
-                int foodId = result.getInt(1);
-                int restaurantId = result.getInt(2);
-                String foodName = result.getString(3);
-                String foodPrice = result.getString(4);
-                String foodGroup = result.getString(5);
-                String foodInfo = result.getString(6);
-                System.out.println("foodId"+foodId+"resId"+restaurantId+"foodName"+foodName+"foodGroup"+foodGroup
-                        +"가격:"+foodPrice+" 인푀"+foodInfo);
-                foodModels[i] = new FoodModel(foodId, restaurantId, foodName, foodPrice, foodGroup, foodInfo);
-
-                result.moveToNext();
+                    result.moveToNext();
+                }
+            }
+        } finally {
+            if (result != null && !result.isClosed()) {
+                result.close();
             }
         }
 
-        result.close();
         database.close();
     }
 
@@ -126,13 +130,16 @@ public class DetailPresenterImpl implements DetailPresenter {
         String sql = "SELECT COUNT(*) FROM " + "ordernum " + "WHERE restaurant_id = " + "'" + restaurant + "'";
         Cursor result = database.rawQuery(sql, null);
 
-        if(result.moveToFirst()) {
-            ordernum = result.getInt(0);
+        try {
+            if(result.moveToFirst()) {
+                ordernum = result.getInt(0);
+            }
+            detailView.setOrder(ordernum);
+        } finally {
+            if (result != null && !result.isClosed()) {
+                result.close();
+            }
         }
-
-        detailView.setOrder(ordernum);
-
-        result.close();
         database.close();
     }
 
@@ -236,21 +243,25 @@ public class DetailPresenterImpl implements DetailPresenter {
 
         Cursor resultReview = database.rawQuery(sqlReview, null);
         System.out.println("리뷰갯수:"+resultReview.getCount());
-        if(resultReview.getCount() >= 2) {
-            if(resultReview.moveToFirst()) {
-                int Y = Integer.parseInt(resultReview.getString(1));
-                System.out.println("리뷰 N : " + resultReview.getString(0) + " / " + resultReview.getString(1));
 
-                resultReview.moveToNext();
-                int N = Integer.parseInt(resultReview.getString(1));
-                System.out.println("리뷰 Y : " + resultReview.getString(0) + " / " + resultReview.getString(1));
+        try {
+            if (resultReview.getCount() >= 2) {
+                if (resultReview.moveToFirst()) {
+                    int Y = Integer.parseInt(resultReview.getString(1));
+                    System.out.println("리뷰 N : " + resultReview.getString(0) + " / " + resultReview.getString(1));
 
-                detailView.setReview(Y,N);
+                    resultReview.moveToNext();
+                    int N = Integer.parseInt(resultReview.getString(1));
+                    System.out.println("리뷰 Y : " + resultReview.getString(0) + " / " + resultReview.getString(1));
+
+                    detailView.setReview(Y, N);
+                }
+            }
+        } finally {
+            if (resultReview != null && !resultReview.isClosed()) {
+                resultReview.close();
             }
         }
-
-
-        resultReview.close();
         database.close();
     }
 

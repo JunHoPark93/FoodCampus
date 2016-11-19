@@ -63,13 +63,17 @@ public class MainPresenterImpl implements MainPresenter {
         System.out.println("길이"+result.getCount());
 
         // result(Cursor 객체)가 비어 있으면 false 리턴
-        if(result.moveToFirst()){
-            long id = result.getLong(1);
-            String voca = result.getString(2);
-            Toast.makeText(context, "DB조회테스트 id= "+id+" num="+voca, Toast.LENGTH_LONG).show();
+        try {
+            if (result.moveToFirst()) {
+                long id = result.getLong(1);
+                String voca = result.getString(2);
+                Toast.makeText(context, "DB조회테스트 id= " + id + " num=" + voca, Toast.LENGTH_LONG).show();
+            }
+        } finally {
+            if (result != null && !result.isClosed()) {
+                result.close();
+            }
         }
-
-        result.close();
     }
 
     /**

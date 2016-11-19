@@ -108,24 +108,29 @@ public class RestaurantPresenterImpl implements RestaurantPrestenter {
         restaurantModels = new RestaurantModel[result.getCount()];
         System.out.println("갯수"+result.getCount());
 
-        if(result.moveToFirst()) {
-            for (int i = 0; i < result.getCount(); i++) {
-                int restaurantId = result.getInt(1);
-                int categoryId = result.getInt(2);
-                String restaurantName = result.getString(3);
-                String restaurantInfo = result.getString(4);
-                String phone = result.getString(5);
-                String openTime = result.getString(6);
-                String closeTime = result.getString(7);
+        try {
+            if (result.moveToFirst()) {
+                for (int i = 0; i < result.getCount(); i++) {
+                    int restaurantId = result.getInt(1);
+                    int categoryId = result.getInt(2);
+                    String restaurantName = result.getString(3);
+                    String restaurantInfo = result.getString(4);
+                    String phone = result.getString(5);
+                    String openTime = result.getString(6);
+                    String closeTime = result.getString(7);
 
-                restaurantModels[i] = new RestaurantModel(restaurantId, categoryId, restaurantName,
-                        restaurantInfo, phone, openTime, closeTime);
+                    restaurantModels[i] = new RestaurantModel(restaurantId, categoryId, restaurantName,
+                            restaurantInfo, phone, openTime, closeTime);
 
-                restaurantView.add(restaurantModels[i]); // 레스토랑 모델 뷰쪽에 던짐
-                result.moveToNext(); // 칼럼한줄내려
+                    restaurantView.add(restaurantModels[i]); // 레스토랑 모델 뷰쪽에 던짐
+                    result.moveToNext(); // 칼럼한줄내려
+                }
+            }
+        } finally {
+            if (result != null && !result.isClosed()) {
+                result.close();
             }
         }
-
         database.close();
     }
 }
