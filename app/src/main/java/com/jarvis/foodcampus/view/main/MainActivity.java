@@ -12,6 +12,7 @@ import com.jarvis.foodcampus.R;
 import com.jarvis.foodcampus.presenter.main.MainPresenter;
 import com.jarvis.foodcampus.presenter.main.MainPresenterImpl;
 import com.jarvis.foodcampus.view.base.BaseActivity;
+import com.jarvis.foodcampus.view.favorite.FavoriteActivity;
 import com.jarvis.foodcampus.view.restaurant.RestaurantActivity;
 
 import butterknife.BindView;
@@ -20,6 +21,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainView {
 
+    @BindView(R.id.main_favorite_btn)
+    Button mainFavoriteBtn;
     private MainPresenter mainPresenter;
 
     @BindView(R.id.pizza_btn)
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
         // 어떤 레스토랑(치킨,피자...)이 눌렸는지에 대한 정보를 같이 넘김
         Intent intent = new Intent(getApplicationContext(), RestaurantActivity.class);
-        intent.putExtra("restaurant",btnCheck);
+        intent.putExtra("restaurant", btnCheck);
         startActivity(intent);
     }
 
@@ -61,11 +64,19 @@ public class MainActivity extends BaseActivity implements MainView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RestaurantActivity.class);
-                intent.putExtra("restaurant","search");
-                intent.putExtra("searchContent",searchEdit.getText().toString());
+                intent.putExtra("restaurant", "search");
+                intent.putExtra("searchContent", searchEdit.getText().toString());
 
                 startActivity(intent);
 
+            }
+        });
+
+        mainFavoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
+                startActivity(intent);
             }
         });
     }
