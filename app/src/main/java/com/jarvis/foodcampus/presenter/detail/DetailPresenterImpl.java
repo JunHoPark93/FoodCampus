@@ -423,4 +423,78 @@ public class DetailPresenterImpl implements DetailPresenter {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void sendFavorite(String resId) {
+
+        sharedPreferences = context.getSharedPreferences("login", MODE_PRIVATE);
+        final String api_id = sharedPreferences.getString("serial_number",null);
+        final String restaurantId = resId;
+
+        class SendFavorite extends AsyncTask<String, Void, String> {
+
+            private URL url;
+
+            public SendFavorite(String url) throws MalformedURLException {
+                this.url=new URL(url);
+            }
+
+            private String readStream(InputStream in) throws IOException {
+                StringBuilder jsonHtml = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                String line = null;
+
+                while((line = reader.readLine()) != null)
+                    jsonHtml.append(line);
+
+                reader.close();
+                return jsonHtml.toString();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+
+                    String postData = "api_id="+api_id+"&restaurant_id="+restaurantId;
+
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    conn.setRequestMethod("POST");
+                    conn.setConnectTimeout(10000);
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    OutputStream outputStream = conn.getOutputStream();
+                    outputStream.write(postData.getBytes("UTF-8"));
+                    outputStream.flush();
+                    outputStream.close();
+                    String result = readStream(conn.getInputStream());
+                    conn.disconnect();
+
+                    return result;
+                }
+                catch (Exception e) {
+                    Log.i("PHPRequest", "request was failed.");
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                System.out.println("즐겨찾기 추가 끝");
+                super.onPostExecute(s);
+            }
+        }
+
+        SendFavorite sendFavorite = null;
+
+        /**
+         *  주소 수정하고php 파일 만들어야 됨
+         */
+        try {
+            sendFavorite = new SendFavorite("http://117.17.158.237:3389/index.php/mFavorite");
+            sendFavorite.execute();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 }

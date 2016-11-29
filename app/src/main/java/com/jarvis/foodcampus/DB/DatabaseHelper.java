@@ -55,6 +55,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseManage.Review.COLUMN_NAME_USER_ID + " INTEGER, " +
             DatabaseManage.Review.COLUMN_NAME_LIKE_YN + " TEXT )";
 
+    private static final String SQL_CREATE_FAVORITE_TABLE = "CREATE TABLE " +
+            DatabaseManage.Favorite.TABLE_NAME + "(" +
+            DatabaseManage.Favorite._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            DatabaseManage.Favorite.COLUMN_NAME_RESTAURANT_ID + " INTEGER, " +
+            DatabaseManage.Favorite.COLUMN_NAME_USER_ID + " INTEGER )";
+
+
 
 
     public DatabaseHelper(Context context) {
@@ -72,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_FOOD_TABLE);
         db.execSQL(SQL_CREATE_ORDER_TABLE);
         db.execSQL(SQL_CREATE_REVIEW_TABLE);
+        db.execSQL(SQL_CREATE_FAVORITE_TABLE);
 
         Log.i("DatabaseHelper Table","테이블생성");
     }

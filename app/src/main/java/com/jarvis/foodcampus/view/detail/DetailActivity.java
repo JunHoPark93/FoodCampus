@@ -6,11 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,11 +63,15 @@ public class DetailActivity extends BaseActivity implements DetailView {
     RadioButton detailLikeBtn;
     @BindView(R.id.detail_hate_btn)
     RadioButton detailHateBtn;
+    @BindView(R.id.detail_favorite_btn)
+    Switch detailFavoriteBtn;
 
 
     private DetailAdapter detailAdapter;
     private DetailPresenter detailPresenter;
     private int whichBtn;
+    private boolean isFavoriteChecked = false;
+    private String res;
 
     @OnClick(R.id.detail_phone_btn)
     public void onClick(View v) {
@@ -95,7 +101,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
          *  인텐트 받는부분인데 뷰에서 하면 안되는 기능인데 어떻게 빼지
          *  /////////////////////////////////////////////////
          */
-        String res = getIntent().getStringExtra("restaurantId");
+        res = getIntent().getStringExtra("restaurantId");
         String category = getIntent().getStringExtra("categoryId");
         /**
          *  여기까지
@@ -138,10 +144,22 @@ public class DetailActivity extends BaseActivity implements DetailView {
             }
         });
 
-        detailLikeBtn.setOnClickListener(new View.OnClickListener(){
+        detailLikeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 whichBtn = 2;
+            }
+        });
+
+        detailFavoriteBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton cb, boolean on){
+                if(on) {
+                    isFavoriteChecked = true;
+                }
+                else {
+                    isFavoriteChecked = false;
+                }
             }
         });
     }
@@ -179,10 +197,14 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
     @Override
     public void onBackPressed() {
-        if(whichBtn == 2 || whichBtn == 3) {
+        if (whichBtn == 2 || whichBtn == 3) {
             detailPresenter.sendReview(whichBtn);
         }
-        System.out.println("어떤버튼"+whichBtn);
+
+        if(isFavoriteChecked) {
+            detailPresenter.sendFavorite(res); // 즐겨찾기 서버 요청함
+        }
+        System.out.println("어떤버튼" + whichBtn);
         Toast.makeText(this, "백프레스", Toast.LENGTH_SHORT).show();
         finish();
     }

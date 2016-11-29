@@ -7,11 +7,13 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.jarvis.foodcampus.DB.DatabaseHelper;
+import com.jarvis.foodcampus.DB.FavoriteDataSource;
 import com.jarvis.foodcampus.DB.FoodDataSource;
 import com.jarvis.foodcampus.DB.OrderDataSource;
 import com.jarvis.foodcampus.DB.RestaurantDataSource;
 import com.jarvis.foodcampus.DB.ReviewDataSource;
 import com.jarvis.foodcampus.DB.UserDataSource;
+import com.jarvis.foodcampus.model.FavoriteModel;
 import com.jarvis.foodcampus.model.FoodModel;
 import com.jarvis.foodcampus.model.OrderModel;
 import com.jarvis.foodcampus.model.RestaurantModel;
@@ -44,6 +46,7 @@ public class LoginInteractor {
     private FoodDataSource foodDataSource;
     private OrderDataSource orderDataSource;
     private ReviewDataSource reviewDataSource;
+    private FavoriteDataSource favoriteDataSource;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase database;
     private Context context;
@@ -54,6 +57,7 @@ public class LoginInteractor {
     private FoodModel[] foodModels; // 위와 같음
     private OrderModel[] orderModels;
     private ReviewModel[] reviewModels;
+    private FavoriteModel[] favoriteModels;
 
     public LoginInteractor(Context context) {
 
@@ -62,6 +66,7 @@ public class LoginInteractor {
         foodDataSource = new FoodDataSource(context);
         orderDataSource = new OrderDataSource(context);
         reviewDataSource = new ReviewDataSource(context);
+        favoriteDataSource = new FavoriteDataSource(context);
 
         this.context = context;
         databaseHelper = new DatabaseHelper(context);
@@ -140,11 +145,13 @@ public class LoginInteractor {
 //                이미 가입되어있는 회원
                 try {
                     JSONObject jObject = new JSONObject(s);
+                    System.out.println("dd"+jObject);
                     JSONArray results = jObject.getJSONArray("result");
                     JSONArray restaurants = jObject.getJSONArray("restaurants");
                     JSONArray foods = jObject.getJSONArray("foods");
                     JSONArray reviews = jObject.getJSONArray("reviews");
                     JSONArray order = jObject.getJSONArray("orders");
+                    JSONArray favorites = jObject.getJSONArray("favorite"); // php 파일작성해야됨
 
                     System.out.println("주문제이슨 "+order);
                     System.out.println("리뷰제이슨" +reviews);
@@ -256,8 +263,30 @@ public class LoginInteractor {
 
 
 
+                    ////////////////////////////////////////////////////////////////  즐겨찾기 시작
+
+                    favoriteModels = new FavoriteModel[favorites.length()];
+
+                    for(int i=0; i<favorites.length(); i++) {
+                        JSONObject favoriteTemp = favorites.getJSONObject(i);
+
+                        System.out.println("즐겨찾기"+favoriteTemp);
+
+                        String userId = favoriteTemp.getString("USER_ID");
+                        String restaurantId = favoriteTemp.getString("RESTAURANT_ID");
+
+                        favoriteModels[i] = new FavoriteModel(Integer.parseInt(userId), Integer.parseInt(restaurantId));
+                    }
+
+
+
+
+                    ////////////////////////////////////////////////////////////////  즐겨찾기 끝
+
+
+
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                   e.printStackTrace();
                 }
 
                 login();
@@ -283,6 +312,7 @@ public class LoginInteractor {
         database.execSQL("DELETE FROM food");
         database.execSQL("DELETE FROM review");
         database.execSQL("DELETE FROM ordernum");
+        database.execSQL("DELETE FROM favorite");
 
         database.close();
 
@@ -296,6 +326,7 @@ public class LoginInteractor {
         addFoodData(foodModels);
         addOrderData(orderModels);
         addReviewData(reviewModels);
+        addFavoriteData(favoriteModels);
     }
 
     /**
@@ -341,5 +372,15 @@ public class LoginInteractor {
             reviewDataSource.addReview(reviewModels[i]);
         }
         reviewDataSource.close();
+    }
+
+    public void addFavoriteData(FavoriteModel[] favoriteModels) {
+        favoriteDataSource.open();
+
+        for(int i=0; i<favoriteModels.length; i++) {
+            favoriteDataSource.addFavorite(favoriteModels[i]);
+        }
+
+        favoriteDataSource.close();
     }
 }

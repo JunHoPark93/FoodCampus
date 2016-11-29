@@ -106,7 +106,15 @@
             android:id="@+id/main_today_pick_btn"
             android:layout_width="300dp"
             android:layout_above="@+id/main_btn_layout"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="false" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/main_btn_layout"
+            android:id="@+id/main_favorite_btn"
+            android:text="즐겨찾기"
+            android:layout_alignRight="@+id/main_today_pick_btn"
+            android:layout_alignParentRight="true"/>
 
         <EditText
             android:layout_width="wrap_content"
