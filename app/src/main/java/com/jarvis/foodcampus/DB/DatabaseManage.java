@@ -61,5 +61,7 @@ public class DatabaseManage {
         static final String TABLE_NAME = "favorite";
         static final String COLUMN_NAME_USER_ID = "user_id";
         static final String COLUMN_NAME_RESTAURANT_ID = "restaurant_id";
+        static final String COLUMN_NAME_RESTARANT_NAME = "restaurant_name";
+        static final String COLUMN_NAME_CATEGORY_ID = "category_id";
     }
 }

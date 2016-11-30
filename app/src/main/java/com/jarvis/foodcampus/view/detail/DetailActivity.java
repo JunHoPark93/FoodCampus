@@ -120,6 +120,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
         detailPresenter.initData();
         detailPresenter.setRadioButton();
         detailPresenter.setReviewData();
+        detailPresenter.setFavorite();
 
         reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,10 +156,12 @@ public class DetailActivity extends BaseActivity implements DetailView {
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean on){
                 if(on) {
-                    isFavoriteChecked = true;
+                    //isFavoriteChecked = true;
+                    detailPresenter.sendFavorite(res, true);
                 }
                 else {
-                    isFavoriteChecked = false;
+                    //isFavoriteChecked = false;
+                    detailPresenter.sendFavorite(res, false);
                 }
             }
         });
@@ -196,14 +199,38 @@ public class DetailActivity extends BaseActivity implements DetailView {
     }
 
     @Override
+    public void setFavorite() {
+        System.out.println("스위치체크할것");
+
+        detailFavoriteBtn.setOnCheckedChangeListener(null);
+        detailFavoriteBtn.setChecked(true);
+        detailFavoriteBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton cb, boolean on){
+                if(on) {
+                    isFavoriteChecked = true;
+                }
+                else {
+                    isFavoriteChecked = false;
+                }
+            }
+        });
+
+        // 요청안해주면 겉보기에는 true인데 뒤로가기하면 false로 요청되..
+
+    }
+
+    @Override
     public void onBackPressed() {
         if (whichBtn == 2 || whichBtn == 3) {
             detailPresenter.sendReview(whichBtn);
         }
 
-        if(isFavoriteChecked) {
-            detailPresenter.sendFavorite(res); // 즐겨찾기 서버 요청함
-        }
+//        if(isFavoriteChecked) {
+//            detailPresenter.sendFavorite(res, true); // 즐겨찾기 서버 요청함
+//        } else {
+//            detailPresenter.sendFavorite(res, false);
+//        }
         System.out.println("어떤버튼" + whichBtn);
         Toast.makeText(this, "백프레스", Toast.LENGTH_SHORT).show();
         finish();

@@ -59,10 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseManage.Favorite.TABLE_NAME + "(" +
             DatabaseManage.Favorite._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             DatabaseManage.Favorite.COLUMN_NAME_RESTAURANT_ID + " INTEGER, " +
+            DatabaseManage.Favorite.COLUMN_NAME_RESTARANT_NAME + " STRING, " +
+            DatabaseManage.Favorite.COLUMN_NAME_CATEGORY_ID + " INTEGER," +
             DatabaseManage.Favorite.COLUMN_NAME_USER_ID + " INTEGER )";
-
-
-
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

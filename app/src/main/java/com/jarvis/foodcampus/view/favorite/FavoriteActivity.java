@@ -51,13 +51,37 @@ public class FavoriteActivity extends BaseActivity implements FavoriteView, Adap
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         FavoriteModel favoriteModel = (FavoriteModel) parent.getItemAtPosition(position);
+        String category;
 
         // 나중엔 position 에따라 달라짐
         // 인텐트
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("restaurantId",String.valueOf(favoriteModel.getRestaurantId())); // 넘어갈때 레스토랑id 같이 넘김
-        intent.putExtra("categoryId","chicken"); // 디테일액티비티에서 그림아이콘 설정하기 위해서 넘김
 
+        switch (favoriteModel.getCategoryId()) {
+            case 1:
+                category = "chicken";
+                break;
+            case 2:
+                category = "pizza";
+                break;
+            case 3:
+                category = "korean";
+                break;
+            case 4:
+                category = "chinese";
+                break;
+            case 5:
+                category = "night";
+                break;
+            case 6:
+                category = "japanese";
+                break;
+            default:
+                category = "chicken";
+        }
+
+        intent.putExtra("categoryId", category); // 디테일액티비티에서 그림아이콘 설정하기 위해서 넘김
         startActivity(intent);
     }
 

@@ -161,14 +161,37 @@ public class DetailPresenterImpl implements DetailPresenter {
                 resIcon = context.getResources().getDrawable(R.drawable.pizza_main);
                 break;
 
-            case "5":
+            /**
+             * 여기 밑에 2개 바꿔야 됨 아이콘
+             */
+            case "night":
+                resIcon = context.getResources().getDrawable(R.drawable.main_night);
                 break;
 
-            case "6":
+            case "japanese":
+                resIcon = context.getResources().getDrawable(R.drawable.main_dosirak);
                 break;
         }
 
         return resIcon;
+    }
+
+    // sqlite에서 즐겨찾기 정보 가져오고 존재 한다면 뷰에 switch버튼 true 설정
+    public void setFavorite() {
+
+        database = databaseHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM favorite WHERE restaurant_id = " + restaurant;
+        Cursor result = database.rawQuery(sql, null);
+
+        if(result.getCount() != 1) {
+
+        } else {
+            System.out.println("1진입임");
+            detailView.setFavorite();
+        }
+
+        database.close();
     }
 
 
@@ -425,12 +448,18 @@ public class DetailPresenterImpl implements DetailPresenter {
     }
 
     @Override
-    public void sendFavorite(String resId) {
+    public void sendFavorite(String resId, boolean isFav) {
 
         sharedPreferences = context.getSharedPreferences("login", MODE_PRIVATE);
         final String api_id = sharedPreferences.getString("serial_number",null);
         final String restaurantId = resId;
-
+        final String fav;
+        if(isFav) {
+            fav = "true";
+        } else {
+            fav = "false";
+        }
+        System.out.println("오우우"+isFav);
         class SendFavorite extends AsyncTask<String, Void, String> {
 
             private URL url;
@@ -454,8 +483,8 @@ public class DetailPresenterImpl implements DetailPresenter {
             @Override
             protected String doInBackground(String... params) {
                 try {
-
-                    String postData = "api_id="+api_id+"&restaurant_id="+restaurantId;
+                    System.out.println("시발"+api_id+"  "+restaurantId+" "+fav);
+                    String postData = "api_id="+api_id+"&restaurant_id="+restaurantId+"&fav="+fav;
 
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

@@ -13,5 +13,6 @@ public interface DetailPresenter {
     void setRadioButton();
     void sendReview(int whichBtn);
     void setReviewData();
-    void sendFavorite(String resId);
+    void sendFavorite(String resId, boolean isFav);
+    void setFavorite();
 }

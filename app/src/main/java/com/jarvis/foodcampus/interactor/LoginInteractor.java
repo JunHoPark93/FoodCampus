@@ -276,7 +276,7 @@ public class LoginInteractor {
                         String restaurantId = favoriteTemp.getString("RESTAURANT_ID");
 
                         System.out.println("즐겨찾기시발"+userId+restaurantId);
-                        favoriteModels[i] = new FavoriteModel(Integer.parseInt(userId), Integer.parseInt(restaurantId));
+                        favoriteModels[i] = new FavoriteModel(Integer.parseInt(userId), Integer.parseInt(restaurantId),1,"default");
                     }
 
 
