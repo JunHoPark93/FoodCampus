@@ -60,6 +60,14 @@
 
         </activity>
 
+        <!-- Favorite액티비티-->
+        <activity
+            android:name=".view.favorite.FavoriteActivity"
+            android:parentActivityName=".view.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+
         <!--SchoolFood액티비티-->
         <activity
             android:name=".view.schoolfood.SchoolFoodActivity"
