@@ -18,4 +18,5 @@ public interface DetailView {
     void setOrder(int num);
     void setDefaultRadioButton();
     void setReview(int y, int n);
+    void setFavorite();
 }
