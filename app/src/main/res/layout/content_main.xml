@@ -104,7 +104,7 @@
             android:scaleType="fitXY"
             android:background="#00ffffff"
             android:id="@+id/main_today_pick_btn"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_above="@+id/main_btn_layout"
             android:layout_centerHorizontal="false" />
         <Button
