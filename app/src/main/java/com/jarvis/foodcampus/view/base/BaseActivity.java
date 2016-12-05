@@ -33,6 +33,20 @@ import com.kakao.util.helper.log.Logger;
  * Created by JunHo on 2016-10-04.
  */
 
+/**
+ *
+ *   컴퓨터 프로그램 저작물
+ *   컴퓨터 프로그램 저작물은 특정한 결과를 얻기 위하여 컴퓨터 등 정보 처리 능력을 가진 장치 내에서 직접 또는 간접으로 사용되는 일련의 지시,
+ *   명령으로 표현된 창작물을 말한다. (저작권법 제 2조 제 16호)
+ *
+ *   본 프로그램은 한국저작권 위원회에 등록이 된 프로그램으로 기획,디자인,개발 등 프로그램적 면에서 유사성이 의심될 경우 심사 의뢰를 당할 수 있습니다.
+ *   의뢰당한 프로그램은 전문가 감정이 들어가며 사용된 변수명, 함수명, 스키마 등을 근거로 저작권 침해 여부를 판단합니다.
+
+ *   소스코드가 없어도 apk 실행파일만으로 역컴파일 과정을 거쳐 추적이 가능합니다.
+ *   허락 없이 개작하는 행위나, 창작성이 부가되지 않은 개작의 경우라면 저작권 침해 문제가 발생하여 법적 문제 (벌금형 또는 징역형) 가 생길 수 있음을 알려드립니다.
+ *
+ */
+
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
         ,BaseActivityView {
@@ -274,19 +288,6 @@ public abstract class BaseActivity extends AppCompatActivity
         }
     }
 
-/*
-    // 프로필 사진 클릭
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // 프로필액티비티 만들고 넣으면됨
-            case R.id.nav_imageView:
-                //Intent intent = new Intent(this, ProfileActivity.class);
-                //intent.putExtra("UserObject", userObject);
-                //createBackStack(intent);
-                break;
-        }
-    }
-*/
     @Override
     public void redirectLoginActivity() {
         createBackStack(new Intent(this, LoginActivity.class));
